@@ -287,30 +287,64 @@
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
        
         
-        /* Animación de Respiración */
+/* --- Estilos del Círculo de Respiración --- */
+.breathing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--color-bg-alt);
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+}
+
 .breathing-circle {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     background-color: var(--color-secondary);
     border-radius: 50%;
-    margin: 2rem auto;
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-weight: bold;
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(43, 157, 122, 0.7);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 25px rgba(43, 157, 122, 0.3);
+    position: relative;
+    transition: transform 0.3s ease;
 }
 
-.breathing-active {
-    animation: breathe 12s infinite ease-in-out;
+/* El texto vive aquí para poder animarlo */
+.breathing-circle::after {
+    content: "Click Iniciar"; /* Texto por defecto */
 }
 
-@keyframes breathe {
-    0%, 100% { transform: scale(1); content: "Exhala"; box-shadow: 0 0 0 0 rgba(43, 157, 122, 0.7); }
-    40% { transform: scale(1.5); content: "Inhala"; box-shadow: 0 0 0 30px rgba(43, 157, 122, 0); }
-    50% { transform: scale(1.5); content: "Retén"; }
+/* Estado Activo: Animación combinada */
+.breathing-circle.active {
+    animation: breathe-size 12s infinite ease-in-out;
+}
+
+.breathing-circle.active::after {
+    animation: breathe-text 12s infinite step-end; 
+    /* step-end asegura que el texto cambie de golpe en el momento exacto */
+}
+
+/* Animación 1: Tamaño (Visual) */
+@keyframes breathe-size {
+    0% { transform: scale(1); }       /* Inicio */
+    35% { transform: scale(1.4); }    /* Fin de Inhalación */
+    65% { transform: scale(1.4); }    /* Fin de Retención */
+    100% { transform: scale(1); }     /* Fin de Exhalación */
+}
+
+/* Animación 2: Texto (Guía) */
+@keyframes breathe-text {
+    0% { content: "INHALA (4s)"; }
+    35% { content: "RETÉN (4s)"; }
+    65% { content: "EXHALA (4s)"; }
+    100% { content: "INHALA (4s)"; }
 }
         
     </style>
@@ -507,11 +541,17 @@
                         <h3>Conexión Social</h3>
                         <p>Habla con alguien de confianza sobre cómo te sientes. No te aísles.</p>
                     </article>
-                    <article class="resource-card">
-    <h3>Ejercicio Guiado de Respiración</h3>
-    <div id="breathCircle" class="breathing-circle">4-4-4</div>
-    <button onclick="toggleBreath()" class="btn-outline" style="margin-top:1rem;">Iniciar / Pausar</button>
-</article>
+                    <section id="respiracion-guiada" style="margin-top: 3rem;">
+    <h2 class="text-center">Práctica Guiada: Técnica 4-4-4</h2>
+    <div class="breathing-container">
+        <div id="breathCircle" class="breathing-circle"></div>
+        
+        <button onclick="toggleBreath()" class="btn-help" style="background-color: var(--color-primary);">
+            Iniciar / Pausar
+        </button>
+    </div>
+</section>
+              
                 </div>
                 <div class="text-center" style="margin-top: 2rem;">
                     <button class="btn-help" onclick="toggleModal(true)">Buscar Ayuda Profesional</button>
@@ -602,8 +642,13 @@
     <script>
         function toggleBreath() {
     const circle = document.getElementById('breathCircle');
-    circle.classList.toggle('breathing-active');
-    circle.innerText = circle.classList.contains('breathing-active') ? "" : "Click";
+    circle.classList.toggle('active');
+    
+    // Opcional: Cambiar texto si está pausado
+    if (!circle.classList.contains('active')) {
+        // Al quitar la clase, el CSS vuelve al content por defecto ("Click Iniciar")
+        // No necesitamos JS extra aquí gracias al CSS ::after
+    }
 }
         // Lógica del Modal (Accesibilidad y estado)
         const modal = document.getElementById('helpModal');

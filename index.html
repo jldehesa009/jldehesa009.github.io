@@ -135,6 +135,17 @@
         section { padding: 3rem 0; border-bottom: 1px solid var(--color-border); }
         section:last-of-type { border-bottom: none; }
 
+        /* Animación de entrada al hacer scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .btn-outline {
             display: inline-block;
             border: 2px solid var(--color-primary);
@@ -287,65 +298,70 @@
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
        
         
-/* --- Estilos del Círculo de Respiración --- */
-.breathing-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background-color: var(--color-bg-alt);
-    border-radius: var(--radius);
-    border: 1px solid var(--color-border);
-}
+        /* --- Estilos del Círculo de Respiración --- */
+        .breathing-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            background-color: var(--color-bg-alt);
+            border-radius: var(--radius);
+            border: 1px solid var(--color-border);
+            
+            /* Centrado de la tarjeta */
+            max-width: 350px;
+            width: 100%;
+            margin: 2rem auto;
+        }
 
-.breathing-circle {
-    width: 180px;
-    height: 180px;
-    background-color: var(--color-secondary);
-    border-radius: 50%;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    box-shadow: 0 10px 25px rgba(43, 157, 122, 0.3);
-    position: relative;
-    transition: transform 0.3s ease;
-}
+        .breathing-circle {
+            width: 180px;
+            height: 180px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(43, 157, 122, 0.3);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
 
-/* El texto vive aquí para poder animarlo */
-.breathing-circle::after {
-    content: "Click Iniciar"; /* Texto por defecto */
-}
+        /* El texto vive aquí para poder animarlo */
+        .breathing-circle::after {
+            content: "Click Iniciar"; /* Texto por defecto */
+        }
 
-/* Estado Activo: Animación combinada */
-.breathing-circle.active {
-    animation: breathe-size 12s infinite ease-in-out;
-}
+        /* Estado Activo: Animación combinada */
+        .breathing-circle.active {
+            animation: breathe-size 12s infinite ease-in-out;
+        }
 
-.breathing-circle.active::after {
-    animation: breathe-text 12s infinite step-end; 
-    /* step-end asegura que el texto cambie de golpe en el momento exacto */
-}
+        .breathing-circle.active::after {
+            animation: breathe-text 12s infinite step-end; 
+            /* step-end asegura que el texto cambie de golpe en el momento exacto */
+        }
 
-/* Animación 1: Tamaño (Visual) */
-@keyframes breathe-size {
-    0% { transform: scale(1); }       /* Inicio */
-    35% { transform: scale(1.4); }    /* Fin de Inhalación */
-    65% { transform: scale(1.4); }    /* Fin de Retención */
-    100% { transform: scale(1); }     /* Fin de Exhalación */
-}
+        /* Animación 1: Tamaño (Visual) */
+        @keyframes breathe-size {
+            0% { transform: scale(1); }       /* Inicio */
+            35% { transform: scale(1.4); }    /* Fin de Inhalación */
+            65% { transform: scale(1.4); }    /* Fin de Retención */
+            100% { transform: scale(1); }     /* Fin de Exhalación */
+        }
 
-/* Animación 2: Texto (Guía) */
-@keyframes breathe-text {
-    0% { content: "INHALA (4s)"; }
-    35% { content: "RETÉN (4s)"; }
-    65% { content: "EXHALA (4s)"; }
-    100% { content: "INHALA (4s)"; }
-}
+        /* Animación 2: Texto (Guía) */
+        @keyframes breathe-text {
+            0% { content: "INHALA (4s)"; }
+            35% { content: "RETÉN (4s)"; }
+            65% { content: "EXHALA (4s)"; }
+            100% { content: "INHALA (4s)"; }
+        }
         
     </style>
 </head>
@@ -368,7 +384,7 @@
 
     <main>
         <div class="container">
-            <section class="hero">
+            <section class="hero reveal">
                 <div class="hero-content">
                     <h1>Tu mente importa tanto como tu cuerpo</h1>
                     <p>La salud mental es fundamental para vivir plenamente. Aprende a identificar las señales, cuida tu bienestar y pide ayuda sin miedo.</p>
@@ -389,7 +405,7 @@
         </div>
 
         <div class="container">
-            <section id="que-es">
+            <section id="que-es" class="reveal">
                 <div class="importance-box">
                     <h2>¿Qué es realmente la salud mental?</h2>
                     <p>No es solo la ausencia de trastornos. Es un <strong>proceso dinámico</strong> de bienestar en el que eres consciente de tus capacidades, puedes afrontar las tensiones normales de la vida, trabajar de forma productiva y contribuir a tu comunidad.</p>
@@ -399,7 +415,7 @@
         </div>
 
         <div class="container">
-            <section id="guia-comparativa">
+            <section id="guia-comparativa" class="reveal">
                 <h2>Guía: ¿Conducta Normal o Señal de Alarma?</h2>
                 <p class="text-center">Todos experimentamos emociones difíciles. La clave está en la intensidad, duración e impacto.</p>
                 <br>
@@ -435,7 +451,7 @@
         </div>
 
         <div class="container">
-            <section id="senales">
+            <section id="senales" class="reveal">
                 <h2>Señales Tempranas de Riesgo</h2>
                 <div class="signals-list">
                     <div class="signal-group">
@@ -475,7 +491,7 @@
         </div>
 
         <div class="container">
-            <section>
+            <section class="reveal">
                 <h2>¿Por qué importa la detección temprana?</h2>
                 <ul class="importance-list">
                     <li><span class="check-icon">✓</span> <strong>Mejor pronóstico:</strong> Cuanto antes se atienda, más rápida y efectiva suele ser la recuperación.</li>
@@ -487,7 +503,7 @@
         </div>
 
         <div class="container">
-            <div style="background-color: var(--color-primary); color: white; padding: 3rem; border-radius: var(--radius); margin: 2rem 0; text-align: center;">
+            <div class="reveal" style="background-color: var(--color-primary); color: white; padding: 3rem; border-radius: var(--radius); margin: 2rem 0; text-align: center;">
                 <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">La salud mental es salud comunitaria</h3>
                 <p style="color: #E2E8F0; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
                     Pedir ayuda no es signo de debilidad, sino de autoconocimiento y valentía. Al igual que vas al médico por un dolor físico, tu mente merece atención profesional. Rompamos el silencio con empatía.
@@ -496,7 +512,7 @@
         </div>
 
         <div class="container">
-            <section>
+            <section class="reveal">
                 <h2>Cuándo y cómo buscar ayuda profesional</h2>
                 <div class="comparison-grid">
                     <div class="comp-card">
@@ -518,7 +534,7 @@
         </div>
 
         <div class="container">
-            <section id="recursos">
+            <section id="recursos" class="reveal">
                 <h2>Estrategias de Autocuidado</h2>
                 <div class="resources-grid">
                     <article class="resource-card">
@@ -541,27 +557,26 @@
                         <h3>Conexión Social</h3>
                         <p>Habla con alguien de confianza sobre cómo te sientes. No te aísles.</p>
                     </article>
-
-                </div>
-                </div> 
-
-<div class="container">
-    <div class="breathing-container">
-        <h3>Respiración Guiada</h3>
-        <div id="breathCircle" class="breathing-circle"></div>
-        <button onclick="toggleBreath()" class="btn-help" style="background-color: var(--color-primary);">
-            Iniciar / Pausar
-        </button>
-    </div>
-</div>
-                <div class="text-center" style="margin-top: 2rem;">
-                    <button class="btn-help" onclick="toggleModal(true)">Buscar Ayuda Profesional</button>
                 </div>
             </section>
         </div>
 
         <div class="container">
-            <section id="faq">
+            <div class="breathing-container reveal">
+                <h3>Respiración Guiada</h3>
+                <div id="breathCircle" class="breathing-circle"></div>
+                <button onclick="toggleBreath()" class="btn-help" style="background-color: var(--color-primary);">
+                    Iniciar / Pausar
+                </button>
+            </div>
+            
+            <div class="text-center reveal" style="margin-top: 2rem;">
+                <button class="btn-help" onclick="toggleModal(true)">Buscar Ayuda Profesional</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <section id="faq" class="reveal">
                 <h2>Preguntas Frecuentes</h2>
                 
                 <details>
@@ -608,9 +623,12 @@
             <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.8;">
                 Basado en prácticas de prevención primaria en salud mental y lineamientos de psicología clínica basada en evidencia.
             </p>
-            <p style="margin-top: 1rem;">
-                <a href="#">Aviso Legal</a> | <a href="#">Política de Privacidad</a>
+            
+            <p style="margin-top: 1rem; margin-bottom: 2rem;">
+                <a href="#" onclick="openModal('legalModal'); return false;">Aviso Legal</a> | 
+                <a href="#" onclick="openModal('privacyModal'); return false;">Política de Privacidad</a>
             </p>
+
             <div style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; font-size: 0.85rem;">
                 <p>Diseño y Desarrollo Web: <strong>Jorge Dehesa</strong> &copy; 2026</p>
             </div>
@@ -619,7 +637,7 @@
 
     <div id="helpModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
-            <button class="close-modal" onclick="toggleModal(false)" aria-label="Cerrar ventana de ayuda">&times;</button>
+            <button class="close-modal" onclick="closeModal('helpModal')" aria-label="Cerrar ventana de ayuda">&times;</button>
             <h2 id="modal-title" style="margin-top: 0;">Ayuda Inmediata</h2>
             <p>Si estás en crisis o necesitas orientación, no estás solo/a.</p>
             
@@ -636,53 +654,101 @@
                 <li>Si hay riesgo vital, acude a urgencias.</li>
             </ul>
 
-            <button class="btn-help" onclick="toggleModal(false)" style="width: 100%; margin-top: 2rem; background-color: var(--color-text-light);">Cerrar y volver a la web</button>
+            <button class="btn-help" onclick="closeModal('helpModal')" style="width: 100%; margin-top: 2rem; background-color: var(--color-text-light);">Cerrar y volver a la web</button>
+        </div>
+    </div>
+
+    <div id="legalModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('legalModal')">&times;</button>
+            <h2>Aviso Legal y Descargo de Responsabilidad</h2>
+            <div style="max-height: 300px; overflow-y: auto; font-size: 0.9rem; padding-right: 1rem;">
+                <p><strong>1. Carácter Informativo:</strong> La información contenida en este sitio web tiene únicamente fines educativos y de divulgación sobre salud mental. No constituye asesoramiento médico, psicológico ni psiquiátrico.</p>
+                <p><strong>2. No sustituye ayuda profesional:</strong> El contenido aquí expuesto no debe utilizarse para diagnosticar ni tratar ningún problema de salud o enfermedad. Si usted o alguien que conoce está experimentando dificultades de salud mental, debe consultar a un profesional de la salud calificado.</p>
+                <p><strong>3. Emergencias:</strong> Este sitio web no es un servicio de emergencia. Si se encuentra en una situación de crisis o riesgo vital, comuníquese inmediatamente con los servicios de emergencia locales (911) o acuda al hospital más cercano.</p>
+                <p><strong>4. Limitación de Responsabilidad:</strong> El creador de este sitio (Jorge Dehesa) no se hace responsable por el uso indebido de la información aquí presentada ni por las decisiones tomadas basándose en ella.</p>
+            </div>
+            <button class="btn-help" onclick="closeModal('legalModal')" style="width: 100%; margin-top: 1rem; background: var(--color-text-light);">Entendido</button>
+        </div>
+    </div>
+
+    <div id="privacyModal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
+            <h2>Política de Privacidad</h2>
+            <div style="max-height: 300px; overflow-y: auto; font-size: 0.9rem; padding-right: 1rem;">
+                <p><strong>1. Recopilación de Datos:</strong> Este sitio web es estático y de naturaleza informativa. No recopilamos, almacenamos ni procesamos datos personales de los usuarios (nombres, correos, direcciones IP) en servidores propios.</p>
+                <p><strong>2. Cookies:</strong> Este sitio no utiliza cookies propias de rastreo ni publicidad.</p>
+                <p><strong>3. Servicios de Terceros:</strong> El sitio utiliza Google Fonts para la tipografía. Al cargar estas fuentes, Google puede recibir información técnica estándar (como su dirección IP) necesaria para servir el archivo de la fuente, sujeta a la política de privacidad de Google.</p>
+                <p><strong>4. Alojamiento:</strong> Este sitio está alojado en GitHub Pages. GitHub puede recopilar registros de acceso técnicos con fines de seguridad y rendimiento, sobre los cuales el desarrollador de este sitio no tiene control directo.</p>
+            </div>
+            <button class="btn-help" onclick="closeModal('privacyModal')" style="width: 100%; margin-top: 1rem; background: var(--color-text-light);">Cerrar</button>
         </div>
     </div>
 
     <script>
-        function toggleBreath() {
-    const circle = document.getElementById('breathCircle');
-    circle.classList.toggle('active');
-    
-    // Opcional: Cambiar texto si está pausado
-    if (!circle.classList.contains('active')) {
-        // Al quitar la clase, el CSS vuelve al content por defecto ("Click Iniciar")
-        // No necesitamos JS extra aquí gracias al CSS ::after
-    }
-}
-        // Lógica del Modal (Accesibilidad y estado)
-        const modal = document.getElementById('helpModal');
-        const triggerBtns = document.querySelectorAll('.btn-help');
-        const closeBtn = document.querySelector('.close-modal');
-
-        function toggleModal(show) {
-            if (show) {
+        // Función genérica para abrir cualquier modal por su ID
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
                 modal.classList.add('active');
                 modal.setAttribute('aria-hidden', 'false');
-                // Foco al botón de cerrar para accesibilidad
-                setTimeout(() => closeBtn.focus(), 100);
-                document.body.style.overflow = 'hidden'; // Prevenir scroll fondo
-            } else {
-                modal.classList.remove('active');
-                modal.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
+                document.body.style.overflow = 'hidden'; // Bloquear scroll del fondo
+                
+                // Enfocar el botón de cerrar para accesibilidad
+                const closeBtn = modal.querySelector('.close-modal');
+                if (closeBtn) setTimeout(() => closeBtn.focus(), 100);
             }
         }
 
-        // Cerrar con tecla ESC
+        // Función genérica para cerrar cualquier modal por su ID
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = ''; // Restaurar scroll
+            }
+        }
+
+        // Función específica para el botón "Necesitas Ayuda" del header (usa el ID por defecto)
+        function toggleModal(show) {
+            if (show) openModal('helpModal');
+            else closeModal('helpModal');
+        }
+
+        // Cerrar cualquier modal activo con la tecla ESC
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                toggleModal(false);
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal-overlay.active');
+                if (activeModal) closeModal(activeModal.id);
             }
         });
 
-        // Cerrar al hacer click fuera del contenido
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                toggleModal(false);
+        // Cerrar al hacer click fuera del contenido (en el fondo oscuro)
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal(e.target.id);
             }
         });
+
+        // Lógica del ejercicio de respiración
+        function toggleBreath() {
+            const circle = document.getElementById('breathCircle');
+            circle.classList.toggle('active');
+        }
+
+        // Animación de aparición al hacer scroll (Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Seleccionar elementos a animar
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>

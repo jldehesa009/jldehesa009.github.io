@@ -2,74 +2,600 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <title>J. Dehesa | Campaña Prevención Primaria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienestar Mental: Guía de Prevención y Cuidado</title>
+    <meta name="description" content="Recurso educativo sobre salud mental, detección temprana de señales de riesgo y guía para buscar ayuda profesional.">
+    
+    <meta property="og:title" content="Bienestar Mental: Guía de Prevención">
+    <meta property="og:description" content="Conoce las señales, rompe el estigma y aprende cuándo buscar ayuda.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='100%25' height='100%25' fill='%230F4C81'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-family='sans-serif' font-size='60' text-anchor='middle'%3EGuía de Salud Mental%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Variables y Reset --- */
+        :root {
+            --color-primary: #0F4C81; /* Azul Institucional */
+            --color-primary-dark: #093357;
+            --color-secondary: #2B9D7A; /* Verde Salud/Esperanza */
+            --color-bg: #FFFFFF;
+            --color-bg-alt: #F4F6F8;
+            --color-text: #2D3748;
+            --color-text-light: #4A5568;
+            --color-border: #E2E8F0;
+            --color-warning: #C05621;
+            --color-danger: #C53030;
+            --font-main: 'Inter', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #1A202C;
+                --color-bg-alt: #2D3748;
+                --color-text: #E2E8F0;
+                --color-text-light: #CBD5E0;
+                --color-border: #4A5568;
+                --color-primary: #63B3ED; /* Azul más claro para modo oscuro */
+                --color-secondary: #68D391;
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Accesibilidad: Foco visible */
+        *:focus-visible {
+            outline: 3px solid var(--color-secondary);
+            outline-offset: 2px;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        ul { list-style: none; }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- Tipografía --- */
+        h1, h2, h3 { line-height: 1.2; margin-bottom: 1rem; color: var(--color-primary); }
+        h1 { font-size: 2.5rem; font-weight: 700; }
+        h2 { font-size: 2rem; margin-top: 3rem; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; }
+        p { margin-bottom: 1rem; color: var(--color-text-light); }
+
+        /* --- Header & Nav --- */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-weight: 700; font-size: 1.2rem; color: var(--color-primary); }
+        
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a:hover { color: var(--color-secondary); }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simplificado para móvil */
+        }
+
+        .btn-help {
+            background-color: var(--color-secondary);
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-help:hover { background-color: #238566; }
+
+        /* --- Hero --- */
+        .hero {
+            padding: 4rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .hero-content { max-width: 500px; }
+        .hero-img svg { width: 100%; height: auto; max-height: 400px; }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero-content { margin: 0 auto; }
+        }
+
+        /* --- Componentes Generales --- */
+        section { padding: 3rem 0; border-bottom: 1px solid var(--color-border); }
+        section:last-of-type { border-bottom: none; }
+
+        .btn-outline {
+            display: inline-block;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        .btn-outline:hover { background-color: var(--color-primary); color: #fff; }
+
+        /* --- Tablas / Cards Comparativas --- */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .comp-card {
+            background: var(--color-bg-alt);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .comp-card.warning { border-left-color: var(--color-danger); }
+
+        .flag-normal { color: var(--color-secondary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .flag-alarm { color: var(--color-danger); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1rem; display: block; }
+
+        /* --- Señales Tempranas --- */
+        .signals-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+        .signal-group h3 { color: var(--color-primary); border-bottom: 2px solid var(--color-secondary); padding-bottom: 0.5rem; display: inline-block; }
+        .signal-group ul li { margin-bottom: 0.5rem; position: relative; padding-left: 1.2rem; }
+        .signal-group ul li::before {
+            content: "•"; color: var(--color-secondary); font-weight: bold; position: absolute; left: 0;
+        }
+
+        /* --- Importancia Detección --- */
+        .importance-box {
+            background-color: var(--color-bg-alt);
+            padding: 2rem;
+            border-radius: var(--radius);
+        }
+        .importance-list li { margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+        .check-icon { color: var(--color-secondary); font-weight: bold; }
+
+        /* --- Recursos Autoayuda --- */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+        .resource-card {
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            transition: transform 0.2s;
+        }
+        .resource-card:hover { transform: translateY(-3px); border-color: var(--color-primary); }
+        .resource-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+        /* --- FAQ (Accordion) --- */
+        details {
+            margin-bottom: 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        summary {
+            padding: 1rem;
+            cursor: pointer;
+            background-color: var(--color-bg-alt);
+            font-weight: 600;
+            list-style: none; /* Ocultar triángulo default */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: "+"; font-size: 1.5rem; font-weight: 300; }
+        details[open] summary::after { content: "-"; }
+        .faq-content { padding: 1rem; border-top: 1px solid var(--color-border); }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--color-bg-alt);
+            padding: 3rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        
+        .modal-content {
+            background: var(--color-bg);
+            padding: 2rem;
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-text-light);
+        }
+
+        .emergency-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: block;
+            margin: 1rem 0;
+            text-align: center;
+            background: var(--color-bg-alt);
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+
+        /* Utilidades */
+        .text-center { text-align: center; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        
+    </style>
 </head>
 <body>
-    <nav class="container">
-        <ul><li><strong>J. Dehesa - Psicología</strong></li></ul>
-        <ul>
-            <li><a href="#diferencias">Detección</a></li>
-            <li><a href="#recursos" role="button">Ayuda</a></li>
-        </ul>
-    </nav>
 
-    <main class="container">
-        <header>
-            <hgroup>
-                <h1>Prevención Primaria en Salud Mental</h1>
-                <h2>Identificando el límite entre la respuesta adaptativa y la psicopatología.</h2>
-            </hgroup>
-            <p>Proyecto de Psicoeducación - 4to Semestre, Universidad Olmeca.</p>
-        </header>
-
-        <section id="diferencias">
-            <h3>¿Es Normal o es una Señal de Alerta?</h3>
-            <p>La detección temprana es la clave de la prevención primaria. Aprende a distinguir las señales:</p>
-            <figure>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Situación</th>
-                            <th>Conducta Normal (Funcional)</th>
-                            <th>Señal de Alerta (Riesgo)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Tristeza</strong></td>
-                            <td>Reacción a una pérdida con duración limitada.</td>
-                            <td>Anhedonia persistente (más de 2 semanas).</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ansiedad</strong></td>
-                            <td>Nerviosismo ante un evento específico (ej. exámenes).</td>
-                            <td>Angustia constante sin causa aparente que paraliza.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Sueño</strong></td>
-                            <td>Insomnio ocasional por estrés del día.</td>
-                            <td>Alteraciones crónicas (dormir mucho o casi nada).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </figure>
-        </section>
-
-        <section id="recursos">
-            <article>
-                <header><strong>Directorio de Apoyo</strong></header>
-                <p>Si identificas señales de alerta en ti o en alguien más, busca ayuda profesional:</p>
-                <ul>
-                    <li>Línea de la Vida (Nacional): 800 911 2000</li>
-                    <li>Servicios de salud mental locales - Tabasco.</li>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo" role="banner">Programa Bienestar</div>
+                <ul class="nav-links">
+                    <li><a href="#que-es">¿Qué es?</a></li>
+                    <li><a href="#senales">Señales</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#faq">Preguntas</a></li>
                 </ul>
-                <footer>
-                    <small>Nota: Este sitio es meramente informativo y no sustituye una consulta clínica.</small>
-                </footer>
-            </article>
-        </section>
+                <button class="btn-help" onclick="toggleModal(true)" aria-label="Abrir opciones de ayuda inmediata">¿Necesitas ayuda?</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Tu mente importa tanto como tu cuerpo</h1>
+                    <p>La salud mental es fundamental para vivir plenamente. Aprende a identificar las señales, cuida tu bienestar y pide ayuda sin miedo.</p>
+                    <a href="#guia-comparativa" class="btn-outline">Conoce las señales</a>
+                </div>
+                <div class="hero-img">
+                    <svg role="img" aria-label="Ilustración abstracta de calma y equilibrio mental" viewBox="0 0 400 300">
+                        <defs>
+                            <clipPath id="circle-view"><circle cx="200" cy="150" r="140"/></clipPath>
+                        </defs>
+                        <circle cx="200" cy="150" r="140" fill="#EBF8FF"/>
+                        <path d="M150 300 Q200 100 250 300" fill="#2B9D7A" opacity="0.6"/>
+                        <circle cx="200" cy="120" r="50" fill="#0F4C81"/>
+                        <path d="M150 120 Q200 180 250 120" stroke="white" stroke-width="3" fill="none"/>
+                    </svg>
+                </div>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="que-es">
+                <div class="importance-box">
+                    <h2>¿Qué es realmente la salud mental?</h2>
+                    <p>No es solo la ausencia de trastornos. Es un <strong>proceso dinámico</strong> de bienestar en el que eres consciente de tus capacidades, puedes afrontar las tensiones normales de la vida, trabajar de forma productiva y contribuir a tu comunidad.</p>
+                    <p>Implica una relación equilibrada entre lo que <strong>pensamos</strong>, lo que <strong>sentimos</strong> y cómo <strong>actuamos</strong>.</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="guia-comparativa">
+                <h2>Guía: ¿Conducta Normal o Señal de Alarma?</h2>
+                <p class="text-center">Todos experimentamos emociones difíciles. La clave está en la intensidad, duración e impacto.</p>
+                <br>
+                <div class="comparison-grid">
+                    <article class="comp-card">
+                        <h3>Tristeza</h3>
+                        <br>
+                        <span class="flag-normal">Normal</span>
+                        <p>Respuesta a una pérdida o decepción. Dura días. Puedes disfrutar momentos breves y mantienes tu funcionalidad.</p>
+                        <span class="flag-alarm">⚠️ Señal de Alarma</span>
+                        <p>Persiste > 2 semanas. Sensación de vacío constante, desesperanza, fatiga extrema, pensamientos de muerte.</p>
+                    </article>
+
+                    <article class="comp-card">
+                        <h3>Ansiedad</h3>
+                        <br>
+                        <span class="flag-normal">Normal</span>
+                        <p>Ante un examen o entrevista. Te activa y desaparece al terminar el evento estresante.</p>
+                        <span class="flag-alarm">⚠️ Señal de Alarma</span>
+                        <p>Preocupación incontrolable sin causa aparente. Ataques de pánico, evitación de lugares, insomnio severo.</p>
+                    </article>
+
+                    <article class="comp-card">
+                        <h3>Enojo</h3>
+                        <br>
+                        <span class="flag-normal">Normal</span>
+                        <p>Ante una injusticia o frustración. Se expresa, se resuelve y pasa sin dañar relaciones graves.</p>
+                        <span class="flag-alarm">⚠️ Señal de Alarma</span>
+                        <p>Explosiones desproporcionadas, agresividad física/verbal, irritabilidad constante que aísla socialmente.</p>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="senales">
+                <h2>Señales Tempranas de Riesgo</h2>
+                <div class="signals-list">
+                    <div class="signal-group">
+                        <h3>Emocionales</h3>
+                        <ul>
+                            <li>Cambios drásticos de humor.</li>
+                            <li>Apatía o falta de interés en lo que antes gustaba.</li>
+                            <li>Sentimiento abrumador de culpa.</li>
+                        </ul>
+                    </div>
+                    <div class="signal-group">
+                        <h3>Conductuales</h3>
+                        <ul>
+                            <li>Cambios en sueño (mucho/poco).</li>
+                            <li>Cambios en apetito o peso.</li>
+                            <li>Consumo aumentado de alcohol/sustancias.</li>
+                        </ul>
+                    </div>
+                    <div class="signal-group">
+                        <h3>Cognitivas</h3>
+                        <ul>
+                            <li>Dificultad para concentrarse.</li>
+                            <li>Olvidos frecuentes.</li>
+                            <li>Pensamientos obsesivos o negativos.</li>
+                        </ul>
+                    </div>
+                    <div class="signal-group">
+                        <h3>Sociales</h3>
+                        <ul>
+                            <li>Aislamiento de amigos/familia.</li>
+                            <li>Conflictos frecuentes.</li>
+                            <li>Descuido de responsabilidades.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="container">
+            <section>
+                <h2>¿Por qué importa la detección temprana?</h2>
+                <ul class="importance-list">
+                    <li><span class="check-icon">✓</span> <strong>Mejor pronóstico:</strong> Cuanto antes se atienda, más rápida y efectiva suele ser la recuperación.</li>
+                    <li><span class="check-icon">✓</span> <strong>Prevención de complicaciones:</strong> Evita que un malestar temporal se convierta en un trastorno crónico.</li>
+                    <li><span class="check-icon">✓</span> <strong>Reducción del sufrimiento:</strong> No es necesario "tocar fondo" para merecer sentirse bien.</li>
+                    <li><span class="check-icon">✓</span> <strong>Tratamiento menos invasivo:</strong> A menudo, intervenciones breves son suficientes en etapas iniciales.</li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="container">
+            <div style="background-color: var(--color-primary); color: white; padding: 3rem; border-radius: var(--radius); margin: 2rem 0; text-align: center;">
+                <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">La salud mental es salud comunitaria</h3>
+                <p style="color: #E2E8F0; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
+                    Pedir ayuda no es signo de debilidad, sino de autoconocimiento y valentía. Al igual que vas al médico por un dolor físico, tu mente merece atención profesional. Rompamos el silencio con empatía.
+                </p>
+            </div>
+        </div>
+
+        <div class="container">
+            <section>
+                <h2>Cuándo y cómo buscar ayuda profesional</h2>
+                <div class="comparison-grid">
+                    <div class="comp-card">
+                        <h3>¿Cuándo?</h3>
+                        <p>Si el malestar interfiere con tu vida diaria (trabajo, estudios, higiene), si las estrategias de autocuidado no funcionan, o si simplemente sientes que necesitas apoyo para entenderte mejor.</p>
+                    </div>
+                    <div class="comp-card">
+                        <h3>¿Con quién?</h3>
+                        <p><strong>Psicólogo:</strong> Para terapia, herramientas de afrontamiento y manejo emocional.<br><strong>Psiquiatra:</strong> Médico especialista que puede prescribir medicación si hay desequilibrios bioquímicos.</p>
+                    </div>
+                    <div class="comp-card">
+                        <h3>Primeros pasos</h3>
+                        <p>Agenda una cita de valoración. No necesitas un diagnóstico previo. "Quiero sentirme mejor" es motivo suficiente.</p>
+                        <a href="#" onclick="toggleModal(true); return false;" style="color: var(--color-primary); font-weight: bold; margin-top: 1rem; display: block;">Ver líneas de ayuda &rarr;</a>
+                    </div>
+                </div>
+                <p style="font-size: 0.8rem; margin-top: 1rem;"><em>* Esta web es informativa y no sustituye la evaluación clínica profesional.</em></p>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="recursos">
+                <h2>Estrategias de Autocuidado</h2>
+                <div class="resources-grid">
+                    <article class="resource-card">
+                        <span class="resource-icon" role="img" aria-label="Icono sueño">💤</span>
+                        <h3>Higiene del Sueño</h3>
+                        <p>Mantén horarios fijos. Evita pantallas 1 hora antes de dormir.</p>
+                    </article>
+                    <article class="resource-card">
+                        <span class="resource-icon" role="img" aria-label="Icono movimiento">🏃</span>
+                        <h3>Actividad Física</h3>
+                        <p>30 minutos de caminata al día reducen el cortisol y elevan endorfinas.</p>
+                    </article>
+                    <article class="resource-card">
+                        <span class="resource-icon" role="img" aria-label="Icono respiración">🫁</span>
+                        <h3>Respiración 4-4-4</h3>
+                        <p>Inhala en 4s, retén 4s, exhala en 4s. Repite para calmar el sistema nervioso.</p>
+                    </article>
+                    <article class="resource-card">
+                        <span class="resource-icon" role="img" aria-label="Icono conexión">🤝</span>
+                        <h3>Conexión Social</h3>
+                        <p>Habla con alguien de confianza sobre cómo te sientes. No te aísles.</p>
+                    </article>
+                </div>
+                <div class="text-center" style="margin-top: 2rem;">
+                    <button class="btn-help" onclick="toggleModal(true)">Buscar Ayuda Profesional</button>
+                </div>
+            </section>
+        </div>
+
+        <div class="container">
+            <section id="faq">
+                <h2>Preguntas Frecuentes</h2>
+                
+                <details>
+                    <summary>¿Es normal sentirse triste o ansioso sin razón aparente?</summary>
+                    <div class="faq-content">
+                        <p>A veces las emociones surgen por acumulación de estrés inconsciente o factores biológicos. Si es esporádico, es normal. Si es constante y afecta tu vida, es recomendable explorar la causa con un profesional.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>¿Cómo diferencio la tristeza de la depresión?</summary>
+                    <div class="faq-content">
+                        <p>La tristeza suele tener un detonante claro y disminuye con el tiempo. La depresión es persistente (semanas/meses), afecta la capacidad de disfrutar (anhedonia) y altera funciones básicas como sueño y apetito.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Tengo miedo de ir al psicólogo, ¿qué hago?</summary>
+                    <div class="faq-content">
+                        <p>Es normal sentir nervios. Recuerda que el espacio terapéutico es confidencial y libre de juicios. Puedes agendar una primera sesión solo para conocer al terapeuta y ver cómo te sientes.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>¿Qué hago si temo por mi seguridad o la de alguien más?</summary>
+                    <div class="faq-content">
+                        <p><strong>Busca ayuda inmediata.</strong> Llama a servicios de emergencia o acude al hospital más cercano. El malestar agudo es una emergencia médica válida.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>¿Puedo mejorar sin medicación?</summary>
+                    <div class="faq-content">
+                        <p>Muchos casos se manejan exitosamente solo con psicoterapia y cambios de estilo de vida. La medicación es una herramienta más que se usa solo cuando es necesario y bajo supervisión médica.</p>
+                    </div>
+                </details>
+            </section>
+        </div>
     </main>
+
+    <footer>
+        <div class="container">
+            <p><strong>Campaña Institucional de Bienestar Mental 2024</strong></p>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.8;">
+                Basado en prácticas de prevención primaria en salud mental y lineamientos de psicología clínica basada en evidencia.
+            </p>
+            <p style="margin-top: 1rem;">
+                <a href="#">Aviso Legal</a> | <a href="#">Política de Privacidad</a>
+            </p>
+        </div>
+    </footer>
+
+    <div id="helpModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="close-modal" onclick="toggleModal(false)" aria-label="Cerrar ventana de ayuda">&times;</button>
+            <h2 id="modal-title" style="margin-top: 0;">Ayuda Inmediata</h2>
+            <p>Si estás en crisis o necesitas orientación, no estás solo/a.</p>
+            
+            <div style="margin: 1.5rem 0;">
+                <p><strong>Línea Nacional de Ayuda (Ejemplo):</strong></p>
+                <a href="tel:911" class="emergency-number">911 / 800-000-0000</a>
+                <p style="font-size: 0.9rem; text-align: center;">Disponible 24/7, confidencial y gratuito.</p>
+            </div>
+
+            <h3>Pasos a seguir ahora:</h3>
+            <ul style="margin-top: 1rem; margin-left: 1.5rem;">
+                <li>Respira profundamente 3 veces.</li>
+                <li>Llama a alguien de tu confianza.</li>
+                <li>Si hay riesgo vital, acude a urgencias.</li>
+            </ul>
+
+            <button class="btn-help" onclick="toggleModal(false)" style="width: 100%; margin-top: 2rem; background-color: var(--color-text-light);">Cerrar y volver a la web</button>
+        </div>
+    </div>
+
+    <script>
+        // Lógica del Modal (Accesibilidad y estado)
+        const modal = document.getElementById('helpModal');
+        const triggerBtns = document.querySelectorAll('.btn-help');
+        const closeBtn = document.querySelector('.close-modal');
+
+        function toggleModal(show) {
+            if (show) {
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                // Foco al botón de cerrar para accesibilidad
+                setTimeout(() => closeBtn.focus(), 100);
+                document.body.style.overflow = 'hidden'; // Prevenir scroll fondo
+            } else {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                toggleModal(false);
+            }
+        });
+
+        // Cerrar al hacer click fuera del contenido
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                toggleModal(false);
+            }
+        });
+    </script>
 </body>
 </html>

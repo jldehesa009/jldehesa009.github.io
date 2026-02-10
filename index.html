@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
 
     <style>
         /* --- Variables y Reset --- */
@@ -284,6 +285,33 @@
         /* Utilidades */
         .text-center { text-align: center; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+       
+        
+        /* Animación de Respiración */
+.breathing-circle {
+    width: 150px;
+    height: 150px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+    margin: 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(43, 157, 122, 0.7);
+}
+
+.breathing-active {
+    animation: breathe 12s infinite ease-in-out;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: scale(1); content: "Exhala"; box-shadow: 0 0 0 0 rgba(43, 157, 122, 0.7); }
+    40% { transform: scale(1.5); content: "Inhala"; box-shadow: 0 0 0 30px rgba(43, 157, 122, 0); }
+    50% { transform: scale(1.5); content: "Retén"; }
+}
         
     </style>
 </head>
@@ -479,6 +507,11 @@
                         <h3>Conexión Social</h3>
                         <p>Habla con alguien de confianza sobre cómo te sientes. No te aísles.</p>
                     </article>
+                    <article class="resource-card">
+    <h3>Ejercicio Guiado</h3>
+    <div id="breathCircle" class="breathing-circle">Click</div>
+    <button onclick="toggleBreath()" class="btn-outline" style="margin-top:1rem;">Iniciar / Pausar</button>
+</article>
                 </div>
                 <div class="text-center" style="margin-top: 2rem;">
                     <button class="btn-help" onclick="toggleModal(true)">Buscar Ayuda Profesional</button>
@@ -567,6 +600,11 @@
     </div>
 
     <script>
+        function toggleBreath() {
+    const circle = document.getElementById('breathCircle');
+    circle.classList.toggle('breathing-active');
+    circle.innerText = circle.classList.contains('breathing-active') ? "" : "Click";
+}
         // Lógica del Modal (Accesibilidad y estado)
         const modal = document.getElementById('helpModal');
         const triggerBtns = document.querySelectorAll('.btn-help');

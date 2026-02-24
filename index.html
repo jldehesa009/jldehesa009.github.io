@@ -3,752 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Señales a Tiempo: Guía de Prevención y Cuidado</title>
-    <meta name="description" content="Recurso educativo sobre salud mental, detección temprana de señales de riesgo y guía para buscar ayuda profesional.">
+    <title>JK | Project Hub & Strategy</title>
     
-    <meta property="og:title" content="Bienestar Mental: Guía de Prevención">
-    <meta property="og:description" content="Conoce las señales, rompe el estigma y aprende cuándo buscar ayuda.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='100%25' height='100%25' fill='%230F4C81'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-family='sans-serif' font-size='60' text-anchor='middle'%3EGuía de Salud Mental%3C/text%3E%3C/svg%3E">
-
+    <meta name="description" content="Portfolio y Project Hub de JK. Psicología, análisis crítico, tecnología y desarrollo creativo.">
+    <meta name="keywords" content="JK, Portfolio, Proyectos, Psicología, Tecnología, Investigación, Desarrollo Creativo">
+    <meta name="author" content="JK">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Variables y Reset --- */
+        /* =========================================
+           VARIABLES Y RESET
+           ========================================= */
         :root {
-            --color-primary: #0F4C81; /* Azul Institucional */
-            --color-primary-dark: #093357;
-            --color-secondary: #2B9D7A; /* Verde Salud/Esperanza */
-            --color-bg: #FFFFFF;
-            --color-bg-alt: #F4F6F8;
-            --color-text: #2D3748;
-            --color-text-light: #4A5568;
-            --color-border: #E2E8F0;
-            --color-warning: #C05621;
-            --color-danger: #C53030;
-            --font-main: 'Inter', sans-serif;
-            --radius: 8px;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --bg-color: #0a0a0f;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.06);
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --color-bg: #1A202C;
-                --color-bg-alt: #2D3748;
-                --color-text: #E2E8F0;
-                --color-text-light: #CBD5E0;
-                --color-border: #4A5568;
-                --color-primary: #63B3ED; /* Azul más claro para modo oscuro */
-                --color-secondary: #68D391;
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: var(--font-main);
-            color: var(--color-text);
-            background-color: var(--color-bg);
-            line-height: 1.6;
+        html {
             scroll-behavior: smooth;
+            font-size: 16px;
         }
 
-        /* Accesibilidad: Foco visible */
-        *:focus-visible {
-            outline: 3px solid var(--color-secondary);
-            outline-offset: 2px;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        a { text-decoration: none; color: inherit; transition: color 0.2s; }
-        ul { list-style: none; }
-        
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* --- Tipografía --- */
-        h1, h2, h3 { line-height: 1.2; margin-bottom: 1rem; color: var(--color-primary); }
-        h1 { font-size: 2.5rem; font-weight: 700; }
-        h2 { font-size: 2rem; margin-top: 3rem; margin-bottom: 1.5rem; }
-        h3 { font-size: 1.25rem; font-weight: 600; }
-        p { margin-bottom: 1rem; color: var(--color-text-light); }
-
-        /* --- Header & Nav --- */
-        header {
-            position: sticky;
+        /* =========================================
+           EFECTOS DE FONDO (Glow Futurista)
+           ========================================= */
+        .ambient-glow {
+            position: fixed;
             top: 0;
-            background: var(--color-bg);
-            border-bottom: 1px solid var(--color-border);
-            z-index: 1000;
-            padding: 1rem 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 80vh;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
         }
-        
-        nav {
+
+        /* =========================================
+           SISTEMA DE GRID Y CONTENEDORES
+           ========================================= */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 0;
+        }
+
+        section {
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .logo { font-weight: 700; font-size: 1.2rem; color: var(--color-primary); }
-        
-        .nav-links { display: flex; gap: 2rem; align-items: center; }
-        .nav-links a:hover { color: var(--color-secondary); }
-        
-        @media (max-width: 768px) {
-            .nav-links { display: none; } /* Simplificado para móvil */
+        /* =========================================
+           TIPOGRAFÍA Y ELEMENTOS BASE
+           ========================================= */
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
         }
 
-        .btn-help {
-            background-color: var(--color-secondary);
-            color: #fff;
-            padding: 0.5rem 1.2rem;
-            border-radius: var(--radius);
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 600;
-            border: none;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            max-width: 600px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--glass-bg);
+            color: var(--text-main);
+            text-decoration: none;
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
             cursor: pointer;
-            transition: background 0.2s;
         }
-        .btn-help:hover { background-color: #238566; }
 
-        /* --- Hero --- */
-        .hero {
-            padding: 4rem 0;
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           SECCIONES ESPECÍFICAS
+           ========================================= */
+        
+        /* 1. Hero */
+        #hero {
+            text-align: left;
+            position: relative;
+        }
+
+        /* 2. Sobre Mí */
+        #about p {
+            font-size: 1.25rem;
+            max-width: 700px;
+        }
+
+        /* 3. Proyectos (Grid) */
+        .projects-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            backdrop-filter: blur(12px);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+            background: var(--glass-hover);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-flex;
             align-items: center;
-        }
-        .hero-content { max-width: 500px; }
-        .hero-img svg { width: 100%; height: auto; max-height: 400px; }
-
-        @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero-content { margin: 0 auto; }
+            gap: 0.5rem;
+            transition: var(--transition);
         }
 
-        /* --- Componentes Generales --- */
-        section { padding: 3rem 0; border-bottom: 1px solid var(--color-border); }
-        section:last-of-type { border-bottom: none; }
+        .project-link:hover {
+            opacity: 0.7;
+            gap: 0.8rem;
+        }
 
-        /* Animación de entrada al hacer scroll */
+        /* 4. Filosofía */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .philosophy-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            border-left: 2px solid var(--text-main);
+            padding-left: 1rem;
+        }
+
+        /* 5. CTA Final */
+        #cta-final {
+            text-align: center;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        #cta-final h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        /* 6. Footer */
+        footer {
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* =========================================
+           ANIMACIONES (Scroll Reveal)
+           ========================================= */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
+
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .btn-outline {
-            display: inline-block;
-            border: 2px solid var(--color-primary);
-            color: var(--color-primary);
-            padding: 0.5rem 1.2rem;
-            border-radius: var(--radius);
-            font-weight: 600;
-            margin-top: 1rem;
+        /* =========================================
+           MEDIA QUERIES
+           ========================================= */
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 0;
+            }
+            .project-card {
+                padding: 2rem;
+            }
         }
-        .btn-outline:hover { background-color: var(--color-primary); color: #fff; }
-
-        /* --- Tablas / Cards Comparativas --- */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .comp-card {
-            background: var(--color-bg-alt);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            border-left: 4px solid var(--color-primary);
-        }
-
-        .comp-card.warning { border-left-color: var(--color-danger); }
-
-        .flag-normal { color: var(--color-secondary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        .flag-alarm { color: var(--color-danger); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1rem; display: block; }
-
-        /* --- Señales Tempranas --- */
-        .signals-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-        }
-        .signal-group h3 { color: var(--color-primary); border-bottom: 2px solid var(--color-secondary); padding-bottom: 0.5rem; display: inline-block; }
-        .signal-group ul li { margin-bottom: 0.5rem; position: relative; padding-left: 1.2rem; }
-        .signal-group ul li::before {
-            content: "•"; color: var(--color-secondary); font-weight: bold; position: absolute; left: 0;
-        }
-
-        /* --- Importancia Detección --- */
-        .importance-box {
-            background-color: var(--color-bg-alt);
-            padding: 2rem;
-            border-radius: var(--radius);
-        }
-        .importance-list li { margin-bottom: 0.8rem; display: flex; align-items: flex-start; gap: 0.5rem; }
-        .check-icon { color: var(--color-secondary); font-weight: bold; }
-
-        /* --- Recursos Autoayuda --- */
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            text-align: center;
-        }
-        .resource-card {
-            padding: 1.5rem;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius);
-            transition: transform 0.2s;
-        }
-        .resource-card:hover { transform: translateY(-3px); border-color: var(--color-primary); }
-        .resource-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-
-        /* --- FAQ (Accordion) --- */
-        details {
-            margin-bottom: 1rem;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-        summary {
-            padding: 1rem;
-            cursor: pointer;
-            background-color: var(--color-bg-alt);
-            font-weight: 600;
-            list-style: none; /* Ocultar triángulo default */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: "+"; font-size: 1.5rem; font-weight: 300; }
-        details[open] summary::after { content: "-"; }
-        .faq-content { padding: 1rem; border-top: 1px solid var(--color-border); }
-
-        /* --- Footer --- */
-        footer {
-            background-color: var(--color-bg-alt);
-            padding: 3rem 0;
-            margin-top: 3rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--color-text-light);
-        }
-
-        /* --- Modal --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .modal-overlay.active { opacity: 1; pointer-events: all; }
-        
-        .modal-content {
-            background: var(--color-bg);
-            padding: 2rem;
-            border-radius: var(--radius);
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--color-text-light);
-        }
-
-        .emergency-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-primary);
-            display: block;
-            margin: 1rem 0;
-            text-align: center;
-            background: var(--color-bg-alt);
-            padding: 1rem;
-            border-radius: var(--radius);
-        }
-
-        /* Utilidades */
-        .text-center { text-align: center; }
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-       
-        
-        /* --- Estilos del Círculo de Respiración --- */
-        .breathing-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-            background-color: var(--color-bg-alt);
-            border-radius: var(--radius);
-            border: 1px solid var(--color-border);
-            
-            /* Centrado de la tarjeta */
-            max-width: 350px;
-            width: 100%;
-            margin: 2rem auto;
-        }
-
-        .breathing-circle {
-            width: 180px;
-            height: 180px;
-            background-color: var(--color-secondary);
-            border-radius: 50%;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 25px rgba(43, 157, 122, 0.3);
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        /* El texto vive aquí para poder animarlo */
-        .breathing-circle::after {
-            content: "Click Iniciar"; /* Texto por defecto */
-        }
-
-        /* Estado Activo: Animación combinada */
-        .breathing-circle.active {
-            animation: breathe-size 12s infinite ease-in-out;
-        }
-
-        .breathing-circle.active::after {
-            animation: breathe-text 12s infinite step-end; 
-            /* step-end asegura que el texto cambie de golpe en el momento exacto */
-        }
-
-        /* Animación 1: Tamaño (Visual) */
-        @keyframes breathe-size {
-            0% { transform: scale(1); }       /* Inicio */
-            35% { transform: scale(1.4); }    /* Fin de Inhalación */
-            65% { transform: scale(1.4); }    /* Fin de Retención */
-            100% { transform: scale(1); }     /* Fin de Exhalación */
-        }
-
-        /* Animación 2: Texto (Guía) */
-        @keyframes breathe-text {
-            0% { content: "INHALA (4s)"; }
-            35% { content: "RETÉN (4s)"; }
-            65% { content: "EXHALA (4s)"; }
-            100% { content: "INHALA (4s)"; }
-        }
-        
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo" role="banner">Programa de Salud Mental: Señales a Tiempo</div>
-                <ul class="nav-links">
-                    <li><a href="#que-es">¿Qué es?</a></li>
-                    <li><a href="#senales">Señales</a></li>
-                    <li><a href="#recursos">Recursos</a></li>
-                    <li><a href="#faq">Preguntas</a></li>
-                </ul>
-                <button class="btn-help" onclick="toggleModal(true)" aria-label="Abrir opciones de ayuda inmediata">¿Necesitas ayuda?</button>
-            </nav>
+    <div class="ambient-glow"></div>
+
+    <section id="hero">
+        <div class="container reveal">
+            <h1>Jorge Dehesa</h1>
+            <p class="subtitle">Intersección entre Psicología, Análisis Crítico y Tecnología.</p>
+            <p style="margin-bottom: 3rem;">Diseñando sistemas, investigaciones y proyectos que decodifican el comportamiento y optimizan la interacción digital.</p>
+            <a href="#proyectos" class="btn">Explorar Proyectos</a>
         </div>
-    </header>
+    </section>
 
-    <main>
-        <div class="container">
-            <section class="hero reveal">
-                <div class="hero-content">
-                    <h1>Tu mente importa tanto como tu cuerpo</h1>
-                    <p>La salud mental es fundamental para vivir plenamente. Aprende a identificar las señales, cuida tu bienestar y pide ayuda sin miedo.</p>
-                    <a href="#guia-comparativa" class="btn-outline">Conoce las señales</a>
-                </div>
-                <div class="hero-img">
-                    <svg role="img" aria-label="Ilustración abstracta de calma y equilibrio mental" viewBox="0 0 400 300">
-                        <defs>
-                            <clipPath id="circle-view"><circle cx="200" cy="150" r="140"/></clipPath>
-                        </defs>
-                        <circle cx="200" cy="150" r="140" fill="#EBF8FF"/>
-                        <path d="M150 300 Q200 100 250 300" fill="#2B9D7A" opacity="0.6"/>
-                        <circle cx="200" cy="120" r="50" fill="#0F4C81"/>
-                        <path d="M150 120 Q200 180 250 120" stroke="white" stroke-width="3" fill="none"/>
-                    </svg>
-                </div>
-            </section>
+    <section id="about">
+        <div class="container reveal">
+            <h2>Estructura & Visión.</h2>
+            <p>
+                Mi trabajo se centra en comprender la mente humana para aplicarla en entornos prácticos, desde la conceptualización de ideas hasta el desarrollo de soluciones lógicas. Creo en la creación de valor a través de la estrategia pura, eliminando el ruido y enfocándome en lo que realmente impacta a largo plazo.
+            </p>
         </div>
+    </section>
 
+    <section id="proyectos">
         <div class="container">
-            <section id="que-es" class="reveal">
-                <div class="importance-box">
-                    <h2>¿Qué es realmente la salud mental?</h2>
-                    <p>No es solo la ausencia de trastornos. Es un <strong>proceso dinámico</strong> de bienestar en el que eres consciente de tus capacidades, puedes afrontar las tensiones normales de la vida, trabajar de forma productiva y contribuir a tu comunidad.</p>
-                    <p>Implica una relación equilibrada entre lo que <strong>pensamos</strong>, lo que <strong>sentimos</strong> y cómo <strong>actuamos</strong>.</p>
-                </div>
-            </section>
-        </div>
-
-        <div class="container">
-            <section id="guia-comparativa" class="reveal">
-                <h2>Guía: ¿Conducta Normal o Señal de Alarma?</h2>
-                <p class="text-center">Todos experimentamos emociones difíciles. La clave está en la intensidad, duración e impacto.</p>
-                <br>
-                <div class="comparison-grid">
-                    <article class="comp-card">
-                        <h3>Tristeza</h3>
-                        <br>
-                        <span class="flag-normal">Normal</span>
-                        <p>Respuesta a una pérdida o decepción. Dura días. Puedes disfrutar momentos breves y mantienes tu funcionalidad.</p>
-                        <span class="flag-alarm">⚠️ Señal de Alarma</span>
-                        <p>Persiste > 2 semanas. Sensación de vacío constante, desesperanza, fatiga extrema, pensamientos de muerte.</p>
-                    </article>
-
-                    <article class="comp-card">
-                        <h3>Ansiedad</h3>
-                        <br>
-                        <span class="flag-normal">Normal</span>
-                        <p>Ante un examen o entrevista. Te activa y desaparece al terminar el evento estresante.</p>
-                        <span class="flag-alarm">⚠️ Señal de Alarma</span>
-                        <p>Preocupación incontrolable sin causa aparente. Ataques de pánico, evitación de lugares, insomnio severo.</p>
-                    </article>
-
-                    <article class="comp-card">
-                        <h3>Enojo</h3>
-                        <br>
-                        <span class="flag-normal">Normal</span>
-                        <p>Ante una injusticia o frustración. Se expresa, se resuelve y pasa sin dañar relaciones graves.</p>
-                        <span class="flag-alarm">⚠️ Señal de Alarma</span>
-                        <p>Explosiones desproporcionadas, agresividad física/verbal, irritabilidad constante que aísla socialmente.</p>
-                    </article>
-                </div>
-            </section>
-        </div>
-
-        <div class="container">
-            <section id="senales" class="reveal">
-                <h2>Señales Tempranas de Riesgo</h2>
-                <div class="signals-list">
-                    <div class="signal-group">
-                        <h3>Emocionales</h3>
-                        <ul>
-                            <li>Cambios drásticos de humor.</li>
-                            <li>Apatía o falta de interés en lo que antes gustaba.</li>
-                            <li>Sentimiento abrumador de culpa.</li>
-                        </ul>
-                    </div>
-                    <div class="signal-group">
-                        <h3>Conductuales</h3>
-                        <ul>
-                            <li>Cambios en sueño (mucho/poco).</li>
-                            <li>Cambios en apetito o peso.</li>
-                            <li>Consumo aumentado de alcohol/sustancias.</li>
-                        </ul>
-                    </div>
-                    <div class="signal-group">
-                        <h3>Cognitivas</h3>
-                        <ul>
-                            <li>Dificultad para concentrarse.</li>
-                            <li>Olvidos frecuentes.</li>
-                            <li>Pensamientos obsesivos o negativos.</li>
-                        </ul>
-                    </div>
-                    <div class="signal-group">
-                        <h3>Sociales</h3>
-                        <ul>
-                            <li>Aislamiento de amigos/familia.</li>
-                            <li>Conflictos frecuentes.</li>
-                            <li>Descuido de responsabilidades.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="container">
-            <section class="reveal">
-                <h2>¿Por qué importa la detección temprana?</h2>
-                <ul class="importance-list">
-                    <li><span class="check-icon">✓</span> <strong>Mejor pronóstico:</strong> Cuanto antes se atienda, más rápida y efectiva suele ser la recuperación.</li>
-                    <li><span class="check-icon">✓</span> <strong>Prevención de complicaciones:</strong> Evita que un malestar temporal se convierta en un trastorno crónico.</li>
-                    <li><span class="check-icon">✓</span> <strong>Reducción del sufrimiento:</strong> No es necesario "tocar fondo" para merecer sentirse bien.</li>
-                    <li><span class="check-icon">✓</span> <strong>Tratamiento menos invasivo:</strong> A menudo, intervenciones breves son suficientes en etapas iniciales.</li>
-                </ul>
-            </section>
-        </div>
-
-        <div class="container">
-            <div class="reveal" style="background-color: var(--color-primary); color: white; padding: 3rem; border-radius: var(--radius); margin: 2rem 0; text-align: center;">
-                <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">La salud mental es salud comunitaria</h3>
-                <p style="color: #E2E8F0; font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
-                    Pedir ayuda no es signo de debilidad, sino de autoconocimiento y valentía. Al igual que vas al médico por un dolor físico, tu mente merece atención profesional. Rompamos el silencio con empatía.
-                </p>
-            </div>
-        </div>
-
-        <div class="container">
-            <section class="reveal">
-                <h2>Cuándo y cómo buscar ayuda profesional</h2>
-                <div class="comparison-grid">
-                    <div class="comp-card">
-                        <h3>¿Cuándo?</h3>
-                        <p>Si el malestar interfiere con tu vida diaria (trabajo, estudios, higiene), si las estrategias de autocuidado no funcionan, o si simplemente sientes que necesitas apoyo para entenderte mejor.</p>
-                    </div>
-                    <div class="comp-card">
-                        <h3>¿Con quién?</h3>
-                        <p><strong>Psicólogo:</strong> Para terapia, herramientas de afrontamiento y manejo emocional.<br><strong>Psiquiatra:</strong> Médico especialista que puede prescribir medicación si hay desequilibrios bioquímicos.</p>
-                    </div>
-                    <div class="comp-card">
-                        <h3>Primeros pasos</h3>
-                        <p>Agenda una cita de valoración. No necesitas un diagnóstico previo. "Quiero sentirme mejor" es motivo suficiente.</p>
-                        <a href="#" onclick="toggleModal(true); return false;" style="color: var(--color-primary); font-weight: bold; margin-top: 1rem; display: block;">Ver líneas de ayuda &rarr;</a>
-                    </div>
-                </div>
-                <p style="font-size: 0.8rem; margin-top: 1rem;"><em>* Esta web es informativa y no sustituye la evaluación clínica profesional.</em></p>
-            </section>
-        </div>
-
-        <div class="container">
-            <section id="recursos" class="reveal">
-                <h2>Estrategias de Autocuidado</h2>
-                <div class="resources-grid">
-                    <article class="resource-card">
-                        <span class="resource-icon" role="img" aria-label="Icono sueño">💤</span>
-                        <h3>Higiene del Sueño</h3>
-                        <p>Mantén horarios fijos. Evita pantallas 1 hora antes de dormir.</p>
-                    </article>
-                    <article class="resource-card">
-                        <span class="resource-icon" role="img" aria-label="Icono movimiento">🏃</span>
-                        <h3>Actividad Física</h3>
-                        <p>30 minutos de caminata al día reducen el cortisol y elevan endorfinas.</p>
-                    </article>
-                    <article class="resource-card">
-                        <span class="resource-icon" role="img" aria-label="Icono respiración">🫁</span>
-                        <h3>Respiración 4-4-4</h3>
-                        <p>Inhala en 4s, retén 4s, exhala en 4s. Repite para calmar el sistema nervioso.</p>
-                    </article>
-                    <article class="resource-card">
-                        <span class="resource-icon" role="img" aria-label="Icono conexión">🤝</span>
-                        <h3>Conexión Social</h3>
-                        <p>Habla con alguien de confianza sobre cómo te sientes. No te aísles.</p>
-                    </article>
-                </div>
-            </section>
-        </div>
-
-        <div class="container">
-            <div class="breathing-container reveal">
-                <h3>Respiración Guiada</h3>
-                <div id="breathCircle" class="breathing-circle"></div>
-                <button onclick="toggleBreath()" class="btn-help" style="background-color: var(--color-primary);">
-                    Iniciar / Pausar
-                </button>
-            </div>
-            
-            <div class="text-center reveal" style="margin-top: 2rem;">
-                <button class="btn-help" onclick="toggleModal(true)">Buscar Ayuda Profesional</button>
-            </div>
-        </div>
-
-        <div class="container">
-            <section id="faq" class="reveal">
-                <h2>Preguntas Frecuentes</h2>
+            <h2 class="reveal">Project Hub.</h2>
+            <div class="projects-grid">
                 
-                <details>
-                    <summary>¿Es normal sentirse triste o ansioso sin razón aparente?</summary>
-                    <div class="faq-content">
-                        <p>A veces las emociones surgen por acumulación de estrés inconsciente o factores biológicos. Si es esporádico, es normal. Si es constante y afecta tu vida, es recomendable explorar la causa con un profesional.</p>
-                    </div>
-                </details>
+                <div class="project-card reveal">
+                    <h3>Investigación Cognitiva</h3>
+                    <p>Análisis profundo sobre patrones de comportamiento y su interacción con las interfaces tecnológicas modernas.</p>
+                    <a href="#" class="project-link">Ver Proyecto &rarr;</a>
+                </div>
 
-                <details>
-                    <summary>¿Cómo diferencio la tristeza de la depresión?</summary>
-                    <div class="faq-content">
-                        <p>La tristeza suele tener un detonante claro y disminuye con el tiempo. La depresión es persistente (semanas/meses), afecta la capacidad de disfrutar (anhedonia) y altera funciones básicas como sueño y apetito.</p>
-                    </div>
-                </details>
+                <div class="project-card reveal">
+                    <h3>Proyectos Digitales</h3>
+                    <p>Desarrollo de herramientas de código abierto y experimentación con plataformas digitales orientadas a la optimización.</p>
+                    <a href="#" class="project-link">Ver Proyecto &rarr;</a>
+                </div>
 
-                <details>
-                    <summary>Tengo miedo de ir al psicólogo, ¿qué hago?</summary>
-                    <div class="faq-content">
-                        <p>Es normal sentir nervios. Recuerda que el espacio terapéutico es confidencial y libre de juicios. Puedes agendar una primera sesión solo para conocer al terapeuta y ver cómo te sientes.</p>
-                    </div>
-                </details>
+                <div class="project-card reveal">
+                    <h3>Talleres & Dinámicas</h3>
+                    <p>Sesiones estructuradas diseñadas para facilitar el entendimiento y la aplicación de principios psicológicos en la práctica.</p>
+                    <a href="#" class="project-link">Ver Proyecto &rarr;</a>
+                </div>
 
-                <details>
-                    <summary>¿Qué hago si temo por mi seguridad o la de alguien más?</summary>
-                    <div class="faq-content">
-                        <p><strong>Busca ayuda inmediata.</strong> Llama a servicios de emergencia o acude al hospital más cercano. El malestar agudo es una emergencia médica válida.</p>
-                    </div>
-                </details>
+                <div class="project-card reveal">
+                    <h3>Ensayos & Análisis</h3>
+                    <p>Reflexiones críticas sobre el impacto del desarrollo creativo y la tecnología en la sociedad actual.</p>
+                    <a href="#" class="project-link">Ver Proyecto &rarr;</a>
+                </div>
 
-                <details>
-                    <summary>¿Puedo mejorar sin medicación?</summary>
-                    <div class="faq-content">
-                        <p>Muchos casos se manejan exitosamente solo con psicoterapia y cambios de estilo de vida. La medicación es una herramienta más que se usa solo cuando es necesario y bajo supervisión médica.</p>
-                    </div>
-                </details>
-            </section>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <section id="filosofia">
+        <div class="container reveal">
+            <h2>Principios Base.</h2>
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <h3>Claridad</h3>
+                    <p>Reducir la complejidad a su esencia funcional. Diseñar sistemas comprensibles y evitar la sobrecarga cognitiva.</p>
+                </div>
+                <div class="philosophy-item">
+                    <h3>Estrategia</h3>
+                    <p>Ejecución deliberada. Cada proyecto o investigación tiene un propósito definido y métricas de éxito claras.</p>
+                </div>
+                <div class="philosophy-item">
+                    <h3>Innovación</h3>
+                    <p>Cuestionar paradigmas establecidos para encontrar soluciones no evidentes en la intersección de disciplinas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-final">
+        <div class="container reveal">
+            <h2>Construyendo ideas que merecen existir.</h2>
+            <a href="mailto:hola@tucorreo.com" class="btn">Iniciar diálogo</a>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
-            <p><strong>Campaña Institucional Señales a Tiempo 2026</strong></p>
-            <p style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.8;">
-                Basado en prácticas de prevención primaria en salud mental y lineamientos de psicología clínica basada en evidencia.
-            </p>
-            
-            <p style="margin-top: 1rem; margin-bottom: 2rem;">
-                <a href="#" onclick="openModal('legalModal'); return false;">Aviso Legal</a> | 
-                <a href="#" onclick="openModal('privacyModal'); return false;">Política de Privacidad</a>
-            </p>
-
-            <div style="border-top: 1px solid var(--color-border); padding-top: 1.5rem; font-size: 0.85rem;">
-                <p>Diseño y Desarrollo Web: <strong>Jorge Dehesa</strong> &copy; 2026</p>
+            <p>&copy; <span id="current-year"></span> Jorge Dehesa. Todos los derechos reservados.</p>
+            <div class="footer-links">
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">X (Twitter)</a>
             </div>
         </div>
     </footer>
 
-    <div id="helpModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('helpModal')" aria-label="Cerrar ventana de ayuda">&times;</button>
-            <h2 id="modal-title" style="margin-top: 0;">Ayuda Inmediata</h2>
-            <p>Si estás en crisis o necesitas orientación, no estás solo/a.</p>
-            
-            <div style="margin: 1.5rem 0;">
-                <p><strong>Línea Nacional de Ayuda:</strong></p>
-                <a href="tel:911" class="emergency-number">800-911-2000</a>
-                <p style="font-size: 0.9rem; text-align: center;">Disponible 24/7, confidencial y gratuito.</p>
-            </div>
-
-            <h3>Pasos a seguir ahora:</h3>
-            <ul style="margin-top: 1rem; margin-left: 1.5rem;">
-                <li>Respira profundamente 3 veces.</li>
-                <li>Llama a alguien de tu confianza.</li>
-                <li>Si hay riesgo vital, acude a urgencias.</li>
-            </ul>
-
-            <button class="btn-help" onclick="closeModal('helpModal')" style="width: 100%; margin-top: 2rem; background-color: var(--color-text-light);">Cerrar y volver a la web</button>
-        </div>
-    </div>
-
-    <div id="legalModal" class="modal-overlay" aria-hidden="true">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('legalModal')">&times;</button>
-            <h2>Aviso Legal y Descargo de Responsabilidad</h2>
-            <div style="max-height: 300px; overflow-y: auto; font-size: 0.9rem; padding-right: 1rem;">
-                <p><strong>1. Carácter Informativo:</strong> La información contenida en este sitio web tiene únicamente fines educativos y de divulgación sobre salud mental. No constituye asesoramiento médico, psicológico ni psiquiátrico.</p>
-                <p><strong>2. No sustituye ayuda profesional:</strong> El contenido aquí expuesto no debe utilizarse para diagnosticar ni tratar ningún problema de salud o enfermedad. Si usted o alguien que conoce está experimentando dificultades de salud mental, debe consultar a un profesional de la salud calificado.</p>
-                <p><strong>3. Emergencias:</strong> Este sitio web no es un servicio de emergencia. Si se encuentra en una situación de crisis o riesgo vital, comuníquese inmediatamente con los servicios de emergencia locales (911) o acuda al hospital más cercano.</p>
-                <p><strong>4. Limitación de Responsabilidad:</strong> El creador de este sitio (Jorge Dehesa) no se hace responsable por el uso indebido de la información aquí presentada ni por las decisiones tomadas basándose en ella.</p>
-            </div>
-            <button class="btn-help" onclick="closeModal('legalModal')" style="width: 100%; margin-top: 1rem; background: var(--color-text-light);">Entendido</button>
-        </div>
-    </div>
-
-    <div id="privacyModal" class="modal-overlay" aria-hidden="true">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('privacyModal')">&times;</button>
-            <h2>Política de Privacidad</h2>
-            <div style="max-height: 300px; overflow-y: auto; font-size: 0.9rem; padding-right: 1rem;">
-                <p><strong>1. Recopilación de Datos:</strong> Este sitio web es estático y de naturaleza informativa. No recopilamos, almacenamos ni procesamos datos personales de los usuarios (nombres, correos, direcciones IP) en servidores propios.</p>
-                <p><strong>2. Cookies:</strong> Este sitio no utiliza cookies propias de rastreo ni publicidad.</p>
-                <p><strong>3. Servicios de Terceros:</strong> El sitio utiliza Google Fonts para la tipografía. Al cargar estas fuentes, Google puede recibir información técnica estándar (como su dirección IP) necesaria para servir el archivo de la fuente, sujeta a la política de privacidad de Google.</p>
-                <p><strong>4. Alojamiento:</strong> Este sitio está alojado en GitHub Pages. GitHub puede recopilar registros de acceso técnicos con fines de seguridad y rendimiento, sobre los cuales el desarrollador de este sitio no tiene control directo.</p>
-            </div>
-            <button class="btn-help" onclick="closeModal('privacyModal')" style="width: 100%; margin-top: 1rem; background: var(--color-text-light);">Cerrar</button>
-        </div>
-    </div>
-
     <script>
-        // Función genérica para abrir cualquier modal por su ID
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.add('active');
-                modal.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden'; // Bloquear scroll del fondo
-                
-                // Enfocar el botón de cerrar para accesibilidad
-                const closeBtn = modal.querySelector('.close-modal');
-                if (closeBtn) setTimeout(() => closeBtn.focus(), 100);
-            }
-        }
+        // Actualizar el año dinámicamente en el footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // Función genérica para cerrar cualquier modal por su ID
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.classList.remove('active');
-                modal.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = ''; // Restaurar scroll
-            }
-        }
+        // Intersection Observer para animaciones suaves al hacer scroll
+        const revealElements = document.querySelectorAll('.reveal');
 
-        // Función específica para el botón "Necesitas Ayuda" del header (usa el ID por defecto)
-        function toggleModal(show) {
-            if (show) openModal('helpModal');
-            else closeModal('helpModal');
-        }
+        const revealOptions = {
+            threshold: 0.15, // El elemento debe estar 15% visible para animarse
+            rootMargin: "0px 0px -50px 0px"
+        };
 
-        // Cerrar cualquier modal activo con la tecla ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const activeModal = document.querySelector('.modal-overlay.active');
-                if (activeModal) closeModal(activeModal.id);
-            }
-        });
-
-        // Cerrar al hacer click fuera del contenido (en el fondo oscuro)
-        window.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeModal(e.target.id);
-            }
-        });
-
-        // Lógica del ejercicio de respiración
-        function toggleBreath() {
-            const circle = document.getElementById('breathCircle');
-            circle.classList.toggle('active');
-        }
-
-        // Animación de aparición al hacer scroll (Intersection Observer)
-        const observer = new IntersectionObserver((entries) => {
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
                     entry.target.classList.add('active');
+                    // Opcional: Dejar de observar una vez que ya apareció
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, revealOptions);
 
-        // Seleccionar elementos a animar
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
     </script>
 </body>
 </html>

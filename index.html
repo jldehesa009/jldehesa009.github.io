@@ -196,6 +196,24 @@
             flex-grow: 1;
         }
 
+        /* Etiquetas de Proyectos */
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+            border: 1px solid var(--glass-border);
+        }
         .project-link {
             color: var(--text-main);
             text-decoration: none;
@@ -324,10 +342,16 @@
             <div class="projects-grid">
                 
                 <div class="project-card reveal">
-                     <h3>Señales a Tiempo</h3>
-                     <p>Campaña institucional de prevención primaria en salud mental. Guía interactiva para la detección de señales de riesgo y fomento del autocuidado.</p>
-                     <a href="./senales/" class="project-link">Ver Campaña &rarr;</a>
-                </div>
+                    <div class="project-tags">
+                         <span>Psicología Clínica</span>
+                         <span>UI/UX</span>
+         </div>
+    
+         <h3>Señales a Tiempo</h3>
+         <p>Plataforma interactiva de prevención primaria. Traduce protocolos de detección de riesgo y contención emocional en una interfaz de baja carga cognitiva, optimizando la búsqueda de ayuda profesional.</p>
+    
+         <a href="./senales/" class="project-link">Explorar Plataforma &rarr;</a>
+        </div>
 
                 <div class="project-card reveal">
                     <h3>Investigación Cognitiva</h3>

@@ -12,33 +12,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
-        :root { --bg-dark: #0a0a0f; }
+        :root { var(--bg-dark): #0a0a0f; }
         body { margin: 0; padding: 0; background-color: #0a0a0f; background-image: radial-gradient(circle at center, #1a1a24 0%, #0a0a0f 100%); height: 100vh; overflow: hidden; font-family: 'Caveat', cursive; }
         #wall-container { position: relative; width: 100vw; height: 100vh; padding: 2rem; box-sizing: border-box; }
-        .phrase { 
-            position: absolute; 
-            color: rgba(255, 255, 255, 0.85); 
-            /* Reducimos una pizca el tamaño base para textos largos */
-            font-size: clamp(1.5rem, 2.8vw, 3rem); 
-            line-height: 1.2; 
-            /* Aumentamos el ancho máximo para que se expanda horizontalmente */
-            max-width: 65vw; 
-            min-width: 250px;
-            text-align: center; 
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); 
-            opacity: 0; 
-            transform: translate(-50%, -50%) scale(0.5); 
-            animation: appear 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
-            word-wrap: break-word; 
-        }
-        
-        @keyframes appear { 
-            to { 
-                opacity: 1; 
-                /* Mantenemos el ancla en el centro al rotar */
-                transform: translate(-50%, -50%) scale(1) rotate(var(--rotation)); 
-            } 
-        }
+        .phrase { position: absolute; color: rgba(255, 255, 255, 0.85); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; max-width: 400px; text-align: center; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); opacity: 0; transform: scale(0.5); animation: appear 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        @keyframes appear { to { opacity: 1; transform: scale(1) rotate(var(--rotation)); } }
     </style>
 </head>
 <body>
@@ -79,41 +57,18 @@
         function getRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
         function getDistance(p1, p2) { const dx = p1.x - p2.x; const dy = p1.y - p2.y; return Math.sqrt(dx * dx + dy * dy); }
 
-        function findBestPosition(textLength) {
-            // Definimos los límites por defecto (para textos cortos, usan casi toda la pantalla)
-            let minX = 8, maxX = 92;
-            let minY = 10, maxY = 88;
-
-            // Si el texto es mediano, cerramos un poco los márgenes
-            if (textLength > 60) {
-                minX = 15; maxX = 85;
-                minY = 18; maxY = 80;
-            }
-            
-            // Si el texto es un párrafo muy largo, lo mantenemos en la zona súper segura del centro
-            if (textLength > 150) {
-                minX = 20; maxX = 80;
-                minY = 25; maxY = 65;
-            }
-
-            if (placedPositions.length === 0) return { x: getRandomInt(minX, maxX), y: getRandomInt(minY, maxY) };
-            
+        function findBestPosition() {
+            if (placedPositions.length === 0) return { x: getRandomInt(5, 80), y: getRandomInt(5, 85) };
             let bestPos = { x: 0, y: 0 };
             let maxMinDist = -1;
-            
             for (let i = 0; i < 40; i++) {
-                const candidate = { x: getRandomInt(minX, maxX), y: getRandomInt(minY, maxY) };
+                const candidate = { x: getRandomInt(5, 80), y: getRandomInt(5, 85) };
                 let minDist = Infinity;
-                
                 for (const pos of placedPositions) {
                     const dist = getDistance(candidate, pos);
                     if (dist < minDist) minDist = dist;
                 }
-                
-                if (minDist > maxMinDist) { 
-                    maxMinDist = minDist; 
-                    bestPos = candidate; 
-                }
+                if (minDist > maxMinDist) { maxMinDist = minDist; bestPos = candidate; }
             }
             return bestPos;
         }
@@ -140,25 +95,6 @@
             span.style.setProperty('--rotation', `${rotation}deg`);
 
             wall.appendChild(span);
-        });
-
-        // 4. Escuchar borrados individuales y totales
-        phrasesRef.on('child_removed', (snapshot) => {
-            const span = document.getElementById(`msg-${snapshot.key}`);
-            if (span) {
-                // Efecto de desvanecimiento antes de borrarlo del HTML
-                span.style.transition = 'opacity 0.3s';
-                span.style.opacity = '0';
-                setTimeout(() => span.remove(), 300);
-            }
-        });
-
-        // Para vaciar el muro por completo rápidamente cuando todo se borra
-        phrasesRef.on('value', (snapshot) => {
-            if (!snapshot.exists()) {
-                wall.innerHTML = '';
-                placedPositions = [];
-            }
         });
 
         // 4. Escuchar borrados individuales y totales

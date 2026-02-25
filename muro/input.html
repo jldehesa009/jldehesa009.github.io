@@ -137,6 +137,49 @@
                 alert('No hay un backup reciente guardado.');
             }
         }
+
+        // ==========================================
+        // KILL SWITCH Oculto (Modo Administrador)
+        // ==========================================
+        let tapCount = 0;
+        let tapTimer;
+
+        // Seleccionamos el título H1
+        const adminTrigger = document.querySelector('h1');
+
+        adminTrigger.addEventListener('click', () => {
+            tapCount++;
+            
+            // Si pasas más de 2 segundos sin tocar, el contador se reinicia
+            clearTimeout(tapTimer);
+            tapTimer = setTimeout(() => { tapCount = 0; }, 2000);
+
+            // Al quinto toque rápido, se activa el protocolo
+            if (tapCount === 5) {
+                tapCount = 0; // Reiniciamos el contador
+                triggerHardWipe();
+            }
+        });
+
+        function triggerHardWipe() {
+            const pin = prompt('MODO ADMINISTRADOR.\nIngresa el PIN para el Borrado Irreversible:');
+            
+            if (pin === '0903') { // Tu PIN secreto (9 de marzo)
+                const confirmacion = confirm('⚠️ ADVERTENCIA CRÍTICA ⚠️\nEsto destruirá las frases en la pantalla y vaciará el backup de emergencia.\nNO se podrá deshacer.\n\n¿Proceder con la purga total?');
+                
+                if (confirmacion) {
+                    // 1. Destruimos el backup local
+                    localStorage.removeItem('muro_backup');
+                    
+                    // 2. Destruimos la base de datos en Firebase
+                    phrasesRef.remove();
+                    
+                    alert('Purga completada. El muro y la memoria están en blanco.');
+                }
+            } else if (pin !== null) {
+                alert('Acceso denegado. PIN incorrecto.');
+            }
+        }
     </script>
 </body>
 </html>

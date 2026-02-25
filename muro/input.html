@@ -10,26 +10,44 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
-        body { background-color: #0a0a0f; color: #f8fafc; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .container { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 3rem; border-radius: 16px; width: 90%; max-width: 500px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        h1 { margin-top: 0; font-size: 1.5rem; text-align: center; }
-        textarea { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 1rem; border-radius: 8px; font-size: 1rem; font-family: inherit; resize: vertical; min-height: 100px; margin-bottom: 1rem; box-sizing: border-box; }
+        body { background-color: #0a0a0f; color: #f8fafc; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 2rem 0; min-height: 100vh; margin: 0; }
+        .container { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); padding: 2rem; border-radius: 16px; width: 90%; max-width: 500px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        h1 { margin-top: 0; font-size: 1.5rem; text-align: center; margin-bottom: 1.5rem; }
+        textarea { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 1rem; border-radius: 8px; font-size: 1rem; font-family: inherit; resize: vertical; min-height: 80px; margin-bottom: 1rem; box-sizing: border-box; }
         textarea:focus { outline: none; border-color: #fff; }
+        
         button { width: 100%; padding: 1rem; background: #fff; color: #000; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
         button:hover { background: #e2e8f0; transform: translateY(-2px); }
-        .danger-btn { background: transparent; color: #ef4444; border: 1px solid #ef4444; margin-top: 2rem; }
+        
+        .action-buttons { display: flex; gap: 1rem; margin-top: 2rem; }
+        .danger-btn { background: transparent; color: #ef4444; border: 1px solid #ef4444; }
         .danger-btn:hover { background: #ef4444; color: white; }
+        .warning-btn { background: transparent; color: #eab308; border: 1px solid #eab308; }
+        .warning-btn:hover { background: #eab308; color: black; }
+
+        /* Estilos de la lista de moderación */
+        .phrase-list { list-style: none; padding: 0; margin-top: 2rem; max-height: 250px; overflow-y: auto; border-top: 1px solid rgba(255,255,255,0.1); }
+        .phrase-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+        .phrase-text { width: 85%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #94a3b8; }
+        .delete-icon { width: auto; padding: 0.3rem 0.6rem; background: rgba(239, 68, 68, 0.2); color: #ef4444; border-radius: 4px; font-size: 0.8rem; }
+        .delete-icon:hover { background: #ef4444; color: white; transform: none; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Ingresar al Muro</h1>
+        <h1>Control del Muro</h1>
         <form id="phrase-form">
-            <textarea id="phrase-input" placeholder="Escribe lo que dice el post-it aquí..." required autofocus></textarea>
+            <textarea id="phrase-input" placeholder="Escribe un nuevo post-it..." required autofocus></textarea>
             <button type="submit">Enviar al Muro</button>
         </form>
-        <button class="danger-btn" onclick="clearWall()">Limpiar Muro Completo</button>
+
+        <ul id="phrase-list" class="phrase-list"></ul>
+
+        <div class="action-buttons">
+            <button class="danger-btn" onclick="clearWall()">Limpiar Todo</button>
+            <button class="warning-btn" onclick="restoreWall()">Deshacer</button>
+        </div>
     </div>
 
     <script>
@@ -53,34 +71,70 @@
 };
 
 
-        // 2. Inicializar Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
-        const phrasesRef = database.ref('frases_muro'); // Creamos una "carpeta" en la nube
+        const phrasesRef = database.ref('frases_muro');
 
-        // 3. Lógica del formulario
-        const form = document.getElementById('phrase-form');
-        const input = document.getElementById('phrase-input');
+        let currentData = null; // Memoria temporal para el backup
 
-        form.addEventListener('submit', (e) => {
+        // 2. Escuchar la base de datos para renderizar la lista de moderación
+        phrasesRef.on('value', (snapshot) => {
+            currentData = snapshot.val();
+            renderList(currentData);
+        });
+
+        // 3. Enviar nueva frase
+        document.getElementById('phrase-form').addEventListener('submit', (e) => {
             e.preventDefault();
+            const input = document.getElementById('phrase-input');
             const text = input.value.trim();
             if (!text) return;
 
-            // Enviar a la nube
-            phrasesRef.push({
-                texto: text,
-                timestamp: firebase.database.ServerValue.TIMESTAMP
-            });
-
+            phrasesRef.push({ texto: text, timestamp: firebase.database.ServerValue.TIMESTAMP });
             input.value = '';
             input.focus();
         });
 
-        // 4. Limpiar el muro desde la nube
+        // 4. Funciones de Moderación y Backup
+        function renderList(data) {
+            const list = document.getElementById('phrase-list');
+            list.innerHTML = '';
+            if(!data) return;
+
+            // Ordenar las frases (las más nuevas arriba)
+            const keys = Object.keys(data).reverse();
+            keys.forEach(key => {
+                const li = document.createElement('li');
+                li.className = 'phrase-item';
+                li.innerHTML = `
+                    <span class="phrase-text">${data[key].texto}</span>
+                    <button class="delete-icon" onclick="deletePhrase('${key}')" title="Borrar frase">✕</button>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function deletePhrase(key) {
+            phrasesRef.child(key).remove();
+        }
+
         function clearWall() {
-            if(confirm('¿Estás seguro de borrar TODAS las frases de la nube?')) {
+            if(confirm('¿Seguro que quieres borrar TODO el muro?')) {
+                if(currentData) {
+                    localStorage.setItem('muro_backup', JSON.stringify(currentData));
+                }
                 phrasesRef.remove();
+            }
+        }
+
+        function restoreWall() {
+            const backup = localStorage.getItem('muro_backup');
+            if(backup) {
+                if(confirm('¿Restaurar las frases del último muro borrado?')) {
+                    phrasesRef.set(JSON.parse(backup));
+                }
+            } else {
+                alert('No hay un backup reciente guardado.');
             }
         }
     </script>

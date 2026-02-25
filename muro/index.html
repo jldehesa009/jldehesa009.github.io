@@ -128,7 +128,7 @@
             span.id = `msg-${snapshot.key}`; // Le asignamos su ID único de Firebase
             span.innerText = text;
 
-            const bestPos = findBestPosition(text.length);
+            const bestPos = findBestPosition();
             placedPositions.push(bestPos);
 
             const rotation = getRandomInt(-15, 15);
@@ -140,6 +140,25 @@
             span.style.setProperty('--rotation', `${rotation}deg`);
 
             wall.appendChild(span);
+        });
+
+        // 4. Escuchar borrados individuales y totales
+        phrasesRef.on('child_removed', (snapshot) => {
+            const span = document.getElementById(`msg-${snapshot.key}`);
+            if (span) {
+                // Efecto de desvanecimiento antes de borrarlo del HTML
+                span.style.transition = 'opacity 0.3s';
+                span.style.opacity = '0';
+                setTimeout(() => span.remove(), 300);
+            }
+        });
+
+        // Para vaciar el muro por completo rápidamente cuando todo se borra
+        phrasesRef.on('value', (snapshot) => {
+            if (!snapshot.exists()) {
+                wall.innerHTML = '';
+                placedPositions = [];
+            }
         });
 
         // 4. Escuchar borrados individuales y totales

@@ -232,6 +232,75 @@
             gap: 0.8rem;
         }
 
+        /* =========================================
+           SECCIÓN: JARDÍN DIGITAL (Ensayos)
+           ========================================= */
+        .essays-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .essay-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: var(--transition);
+            backdrop-filter: blur(12px);
+        }
+
+        .essay-item:hover {
+            background: var(--glass-hover);
+            transform: translateX(10px); /* Efecto sutil de desplazamiento lateral */
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .essay-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            min-width: 120px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .essay-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            flex-grow: 1;
+            letter-spacing: -0.01em;
+        }
+
+        .essay-arrow {
+            color: var(--text-muted);
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .essay-item:hover .essay-arrow {
+            color: var(--text-main);
+            transform: translateX(5px);
+        }
+
+        /* Ajuste responsivo para móviles */
+        @media (max-width: 768px) {
+            .essay-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+                padding: 1.5rem;
+            }
+            .essay-date {
+                min-width: auto;
+            }
+        }
+
         /* 4. Filosofía */
         .philosophy-grid {
             display: grid;
@@ -386,6 +455,35 @@
                     <p>Reflexiones críticas sobre el impacto del desarrollo creativo y la tecnología en la sociedad actual.</p>
                     <a href="#" class="project-link">Ver Proyecto &rarr;</a>
                 </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="ensayos">
+        <div class="container">
+            <h2 class="reveal">Notas & Reflexiones.</h2>
+            <p class="reveal" style="margin-bottom: 2.5rem;">Un espacio de documentación continua. Análisis críticos sobre la mente, la tecnología y el diseño.</p>
+            
+            <div class="essays-list">
+                
+                <a href="#" class="essay-item reveal">
+                    <span class="essay-date">Mar 2026</span>
+                    <h3 class="essay-title">Arquitectura Cognitiva: Reduciendo la fricción en interfaces clínicas</h3>
+                    <span class="essay-arrow">&rarr;</span>
+                </a>
+
+                <a href="#" class="essay-item reveal">
+                    <span class="essay-date">Feb 2026</span>
+                    <h3 class="essay-title">El impacto psicológico de los ecosistemas descentralizados</h3>
+                    <span class="essay-arrow">&rarr;</span>
+                </a>
+
+                <a href="#" class="essay-item reveal">
+                    <span class="essay-date">Ene 2026</span>
+                    <h3 class="essay-title">Diseño Sonoro: La modulación de la percepción y el modelado tonal</h3>
+                    <span class="essay-arrow">&rarr;</span>
+                </a>
 
             </div>
         </div>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura Cognitiva | Jorge Dehesa</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0a0a0f;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Botón de regreso minimalista */
+        .nav-bar {
+            padding: 2rem 5%;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .back-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--text-main);
+        }
+
+        /* Contenedor optimizado para lectura (ancho máximo como un libro) */
+        .article-container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .article-header {
+            margin-bottom: 3rem;
+        }
+
+        .article-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .article-content p {
+            font-size: 1.15rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        .article-content h2 {
+            font-size: 1.8rem;
+            margin-top: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .article-content blockquote {
+            border-left: 2px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 2.5rem 0;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a href="../index.html" class="back-link">&larr; Volver al Hub</a>
+    </div>
+
+    <article class="article-container">
+        <header class="article-header">
+            <span class="article-date">Marzo 2026</span>
+            <h1>De mis más profundos abstractos.</h1>
+            <h4>Borges, la física y el arte de moldear lo inefable.</h4>
+            <h5>Originalmente escrito el 28 de julio de 2021 </h5>
+        </header>
+
+        <div class="article-content">
+            <p>Leyendo y escudriñando al vida y obra del Escritor, Poeta y maravilloso pensador, Jorge Luis Borges, surgen, desde los más profundos terrenos de mis pensamientos un sinnúmero de pequeñas descargas eléctricas, pero que en vez de energizarme eléctricamente me llenan de un sentimiento de aporía, casi igual de energizante.</p>
+            <p>Jorge Luis Borges fue un poeta Argentino, ávido de pensamiento y ágil en sus interpretaciones desde muy temprana edad. A sus cortos 7 años ya había escrito una especie de resumen de toda la mitología Griega, y dominó muy jóven, casi sin saberlo, tanto el inglés como el español. Su vida le permitió viajar y tener pronto en su pensamiento una visión más allá de la Argentina de aquella época. Quedó ciego como consecuencia de la enfermedad congénita que había ya afectado a su padre. El hecho no fue repentino, según se lee en la correspondencia de su madre, Leonor Acevedo de Borges:</p>
+            <blockquote>
+                "Se ha extendido desde 1899 sin momentos dramáticos, un lento crepúsculo que duró más de medio siglo."
+            </blockquote>
+            <p>Hace falta más que esta especie de pensamiento reflexivo acerca de la vida y obra del autor para poder dimensionar la grandeza de pensamiento que caracterizó a este personaje. No obstante hay mucha información reunida en libros, ensayos y columnas literarias, acerca de la característica manera del poeta de provocar el pensamiento y las consecuencias que esto tuvo en la generación que dio importancia a sus palabras. Por lo tanto me limito a solo hacer una pequeña reflexión acerca de mi introducción a la vida y obra de Borges.</p>
+            <p>En lo personal, me llama mucho la atención cómo causó gran impacto en el pensamiento de Físicos y Matemáticos, valiéndose estos de la visión casi de otro mundo que tenía Georgie -como le decía su madre- acerca de la literatura, su manera de usar el lenguaje y su recurrente uso de conceptos cómo teoría de conjuntos, recursividad, teoría del caos, infinito y secuencias, sin tener ua preparación propia en estos campos.</p>
+            <p>Uno de sus más célebres cuentos "El jardín de senderos que se bifurcan" dejó tal huella en el pensamiento de sus lectores que incluso algunos físicos y matemáticos se valieron de algunos planteamientos de Borges para desarrollar teorías en el campo de la física cuántica.</p>
+
+            
+            
+            <blockquote>
+                "Deberían haber mandado un poeta"
+            </blockquote>
+            
+            <p>Es la línea que pronuncia Jodie Foster en su papel de la Dra. Eleanor "Ellie" Ann Arroway en la película Contacto, adaptación de la novela de Carl Sagan con el mismo nombre. Pronuncia estas palabras ante el asombro de un espectáculo de otro mundo que presencia, ante lo cuál se queda sin palabras para describir.</p>
+            <p>Me es por demás inevitable pensar en autores como H.P Lovecraft o Borges y su valiosa labor haciendo del lenguaje una clase de plastilina que moldearon a su gusto para comunicar pensamientos y emociones que de otra manera nos fuera imposible transmitir.</p>
+            <p>Qué ganas de leer más a este personaje, ahora con una visión un poco más amplia acerca de cómo es posible moldear el lenguaje para comunicar lo incomunicable.</p>
+            <p>Espero haber causado el mínimo de curiosidad en ti, acerca de cualquier tema aquí maltratado.
+                <blockquote>"Si de algo soy rico es de perplejidades, y no de certezas" J.L.B</blockquote>
+            </p>
+        </div>
+    </article>
+
+</body>
+</html>

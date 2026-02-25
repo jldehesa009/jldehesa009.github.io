@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muro de Desahogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <style>
+        :root { var(--bg-dark): #0a0a0f; }
+        body { margin: 0; padding: 0; background-color: #0a0a0f; background-image: radial-gradient(circle at center, #1a1a24 0%, #0a0a0f 100%); height: 100vh; overflow: hidden; font-family: 'Caveat', cursive; }
+        #wall-container { position: relative; width: 100vw; height: 100vh; padding: 2rem; box-sizing: border-box; }
+        .phrase { position: absolute; color: rgba(255, 255, 255, 0.85); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; max-width: 400px; text-align: center; text-shadow: 0 0 15px rgba(255, 255, 255, 0.2); opacity: 0; transform: scale(0.5); animation: appear 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+        @keyframes appear { to { opacity: 1; transform: scale(1) rotate(var(--rotation)); } }
+    </style>
+</head>
+<body>
+
+    <div id="wall-container"></div>
+
+    <script>
+        // 1. PEGA TU FIREBASE CONFIG AQUÍ (Igual que en el otro archivo):
+        const firebaseConfig = {
+
+  apiKey: "AIzaSyA67kd8YBNFW-TDxq65GSj1qH8KUZStLYY",
+
+  authDomain: "muro-de-desahogo.firebaseapp.com",
+
+  databaseURL: "https://muro-de-desahogo-default-rtdb.firebaseio.com",
+
+  projectId: "muro-de-desahogo",
+
+  storageBucket: "muro-de-desahogo.firebasestorage.app",
+
+  messagingSenderId: "173042937532",
+
+  appId: "1:173042937532:web:0a46243647cddf8f956ab9"
+
+};
+
+
+        // 2. Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const phrasesRef = database.ref('frases_muro');
+
+        // Lógica espacial que ya teníamos
+        const wall = document.getElementById('wall-container');
+        let placedPositions = [];
+        const colors = ['rgba(255, 255, 255, 0.9)', 'rgba(173, 216, 230, 0.8)', 'rgba(144, 238, 144, 0.8)', 'rgba(255, 228, 225, 0.8)'];
+
+        function getRandomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function getDistance(p1, p2) { const dx = p1.x - p2.x; const dy = p1.y - p2.y; return Math.sqrt(dx * dx + dy * dy); }
+
+        function findBestPosition() {
+            if (placedPositions.length === 0) return { x: getRandomInt(5, 80), y: getRandomInt(5, 85) };
+            let bestPos = { x: 0, y: 0 };
+            let maxMinDist = -1;
+            for (let i = 0; i < 40; i++) {
+                const candidate = { x: getRandomInt(5, 80), y: getRandomInt(5, 85) };
+                let minDist = Infinity;
+                for (const pos of placedPositions) {
+                    const dist = getDistance(candidate, pos);
+                    if (dist < minDist) minDist = dist;
+                }
+                if (minDist > maxMinDist) { maxMinDist = minDist; bestPos = candidate; }
+            }
+            return bestPos;
+        }
+
+        // 3. ESCUCHAR A LA NUBE EN TIEMPO REAL
+        // Esto se ejecuta cada vez que alguien envía algo, y también carga las frases existentes al abrir la página
+        phrasesRef.on('child_added', (snapshot) => {
+            const data = snapshot.val();
+            const text = data.texto;
+
+            const span = document.createElement('div');
+            span.classList.add('phrase');
+            span.innerText = text;
+
+            const bestPos = findBestPosition();
+            placedPositions.push(bestPos);
+
+            const rotation = getRandomInt(-15, 15);
+            const color = colors[getRandomInt(0, colors.length - 1)];
+
+            span.style.top = `${bestPos.y}%`;
+            span.style.left = `${bestPos.x}%`;
+            span.style.color = color;
+            span.style.setProperty('--rotation', `${rotation}deg`);
+
+            wall.appendChild(span);
+        });
+
+        // 4. Si alguien borra el muro desde el control, limpiamos la pantalla
+        phrasesRef.on('child_removed', () => {
+            wall.innerHTML = '';
+            placedPositions = [];
+        });
+
+    </script>
+</body>
+</html>

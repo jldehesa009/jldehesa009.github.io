@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Citlali!</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #e0e7ff 50%, #fbcfe8 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .font-script { font-family: 'Dancing Script', cursive; }
+        .font-elegant { font-family: 'Playfair Display', serif; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-delayed {
+            animation: float 6s ease-in-out 3s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .heartbeat {
+            animation: heartBeat 1.5s infinite;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        /* Ocultar scrollbar para un look más limpio */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #f472b6; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8 overflow-x-hidden relative">
+
+    <!-- Elementos decorativos de fondo -->
+    <div class="absolute top-10 left-10 text-pink-300 opacity-50 floating text-6xl pointer-events-none">✨</div>
+    <div class="absolute bottom-20 right-10 text-purple-300 opacity-50 floating-delayed text-6xl pointer-events-none">🌸</div>
+    <div class="absolute top-40 right-20 text-rose-300 opacity-40 floating text-5xl pointer-events-none">🦋</div>
+    <div class="absolute bottom-40 left-20 text-pink-400 opacity-30 floating-delayed text-5xl pointer-events-none">🧠</div>
+
+    <main class="max-w-3xl w-full space-y-8 relative z-10">
+        
+        <!-- Tarjeta Principal -->
+        <div class="glass-card rounded-3xl shadow-2xl overflow-hidden transform transition-all hover:scale-[1.01] duration-300">
+            <div class="px-6 py-10 sm:p-14 text-center">
+                
+                <h2 class="text-pink-500 font-semibold tracking-widest uppercase text-sm mb-2">Un día muy especial</h2>
+                
+                <h1 class="text-5xl sm:text-6xl text-gray-800 font-script font-bold mb-4 drop-shadow-sm">
+                    ¡Feliz Cumpleaños!
+                </h1>
+                
+                <h3 class="text-3xl sm:text-4xl font-elegant text-purple-600 mb-8">
+                    Citlali Mercedes Retta Felix
+                </h3>
+
+                <!-- Broma de los 15 años -->
+                <div class="inline-block bg-gradient-to-r from-pink-400 to-purple-400 text-white px-6 py-2 rounded-full font-semibold shadow-md mb-8 transform -rotate-2 heartbeat">
+                    🎉 ¡Celebrando tus eternos 15 años! 🎉
+                </div>
+
+                <div class="space-y-6 text-gray-700 text-lg leading-relaxed mb-10">
+                    <p>
+                        Hermosa, inteligente y deslumbrante. Hoy celebramos tu vida, tu esencia y, por supuesto, tu quinceañera (porque la edad cronológica es solo un constructo social, ¿verdad?).
+                    </p>
+                </div>
+
+                <!-- Sección de Psicología -->
+                <div class="bg-white/50 rounded-2xl p-6 shadow-inner border border-pink-100 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-1 rounded-full text-pink-500 text-sm font-bold shadow-sm border border-pink-200">
+                        📋 Diagnóstico Clínico
+                    </div>
+                    <ul class="text-left space-y-4 mt-4 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">🧠</span>
+                            <span><strong>Coeficiente Intelectual:</strong> Fuera de las gráficas. Como futuros colegas psicólogos, confirmo que tu mente es brillante.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">💖</span>
+                            <span><strong>Niveles de Serotonina:</strong> Se elevan al 1000% en todas las personas que tienen la suerte de rodearte. Eres pura luz.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">⏳</span>
+                            <span><strong>Desarrollo Cognitivo:</strong> Nivel experta, pero con la energía, belleza y vitalidad estancada permanentemente en los 15. ¡La ciencia no miente!</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Botón Interactivo -->
+                <div class="mt-12">
+                    <button id="revealBtn" class="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl w-full sm:w-auto text-lg flex items-center justify-center mx-auto gap-2">
+                        <span>Haz clic para tu evaluación final</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mensaje Oculto y Video -->
+                <div id="hiddenMessage" class="hidden mt-8 transition-all duration-500 opacity-0 transform translate-y-4">
+                    <div class="bg-pink-50/80 rounded-2xl p-6 sm:p-8 border-2 border-pink-200 shadow-md">
+                        <h4 class="font-script text-3xl text-pink-600 mb-4">TQM, Citlali 🖤</h4>
+                        <p class="text-gray-700 italic mb-8">
+                            "Ni Freud, ni Jung, ni Skinner, mucho menos Yamel podrían explicar lo increíble que eres amiga. Que este nuevo año de vida (y tus nuevos 15) te traigan tanta felicidad como la que tú le das al mundo. Sigue brillando con esa inteligencia y esa vibra tan chingona que te caracteriza. Agradezco conocer a una ser tan chido como tú. ¡A celebrar en grande, Lali!"
+                        </p>
+                        
+                        <!-- Ventana de Video de YouTube -->
+                        <div class="bg-white/60 p-3 sm:p-4 rounded-xl border border-pink-100 shadow-inner">
+                            <h5 class="text-pink-500 font-semibold mb-3 text-sm uppercase tracking-wide">Un regalito extra para ti 🎬</h5>
+                            
+                            <!-- Contenedor responsivo para el iframe -->
+                            <div class="w-full aspect-video rounded-lg overflow-hidden shadow-md bg-gray-100">
+                                <!-- INSTRUCCIÓN: Cambia la URL en el 'src' por tu enlace de YouTube -->
+                                <!-- Asegúrate de usar el formato: https://www.youtube.com/embed/ID_DEL_VIDEO -->
+                                <iframe 
+                                    class="w-full h-full"
+                                    src="https://www.youtube.com/embed/ADK1OaHw4hA?si=vq8qAHLIR3pd-c70" 
+                                    title="Video Especial de Cumpleaños" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <p class="text-center text-pink-400 text-sm font-medium">
+            Hecho con amor y mucha psicología para la mejor 🌸
+        </p>
+
+    </main>
+
+    <script>
+        // Función para lanzar confeti mágico al cargar
+        function fireConfetti() {
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                
+                // Confeti con colores femeninos
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                    colors: ['#f472b6', '#c084fc', '#fbcfe8', '#e879f9', '#ffffff']
+                }));
+                confetti(Object.assign({}, defaults, { 
+                    particleCount, 
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                    colors: ['#f472b6', '#c084fc', '#fbcfe8', '#e879f9', '#ffffff']
+                }));
+            }, 250);
+        }
+
+        // Lanzar confeti al abrir la página
+        window.onload = function() {
+            setTimeout(fireConfetti, 500);
+        };
+
+        // Lógica del botón interactivo
+        const btn = document.getElementById('revealBtn');
+        const msg = document.getElementById('hiddenMessage');
+
+        btn.addEventListener('click', () => {
+            // Explosión de confeti desde el centro
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#f472b6', '#c084fc', '#fb7185']
+            });
+
+            // Ocultar botón y mostrar mensaje con animación
+            btn.style.display = 'none';
+            msg.classList.remove('hidden');
+            
+            // Pequeño delay para permitir que el display:block se aplique antes de animar la opacidad
+            setTimeout(() => {
+                msg.classList.remove('opacity-0', 'translate-y-4');
+                msg.classList.add('opacity-100', 'translate-y-0');
+            }, 50);
+        });
+    </script>
+</body>
+</html>

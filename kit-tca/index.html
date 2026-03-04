@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prototipo - Mi Refugio (Para Mili)</title>
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
@@ -31,71 +30,99 @@
 </head>
 <body class="p-4 md:p-8">
 
-    <!-- NOTA PARA MILAGROS -->
-    <div class="max-w-4xl mx-auto dev-note shadow-sm">
-        <h2 class="font-bold text-lg mb-1 text-yellow-900"> NOTA DE DESARROLLO PARA MILAGROS:</h2>
-        <p class="text-yellow-800 text-sm">
-            Que onda Edna. Así va el pedo más o menos. Aún no le meto nada de diseño (colores, bordes redondeados, etc.), armé puro esqueleto para tener la estructura base de las vistas. <br><br>
-            
-        </p>
+    <div id="login-screen" class="max-w-md mx-auto mt-20 wireframe-box">
+        <h2 class="text-2xl font-bold mb-4 text-center uppercase tracking-widest">[ Acceso Restringido ]</h2>
+        <p class="text-sm text-gray-500 mb-6 text-center">Ingresa tu contraseña de acceso para ver el prototipo.</p>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold mb-1">Contraseña</label>
+                <input type="password" id="passInput" class="w-full border-2 border-dashed border-gray-400 p-2 outline-none focus:border-gray-600" placeholder="***">
+            </div>
+            <p id="login-error" class="text-red-500 text-xs hidden font-bold">Error: Contraseña incorrecta. Intenta de nuevo.</p>
+            <button onclick="verificarAcceso()" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 border-2 border-dashed border-gray-500 uppercase">
+                Desbloquear
+            </button>
+        </div>
     </div>
 
-    <!-- ESTRUCTURA PRINCIPAL -->
-    <main class="max-w-4xl mx-auto space-y-8">
+    <div id="main-content" style="display: none;">
         
-        <!-- HEADER PLACEHOLDER -->
-        <header class="wireframe-box flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold uppercase tracking-widest">[ LOGO MI REFUGIO ]</h1>
-                <p class="text-gray-500 text-sm">v0.1 - Estructura base</p>
-            </div>
-            <div class="text-xs bg-gray-200 px-2 py-1">Menu placeholder</div>
-        </header>
-
-        <!-- SECCIÓN DE MÓDULOS (En construcción) -->
-        <section>
-            <h2 class="text-xl font-bold mb-4 bg-gray-300 inline-block px-2">1. Vistas Interactivas (TODO)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="max-w-4xl mx-auto dev-note shadow-sm">
+            <h2 class="font-bold text-lg mb-1 text-yellow-900"> NOTA DE DESARROLLO PARA MILAGROS:</h2>
+            <p class="text-yellow-800 text-sm">
+                Que onda Edna. Así va el pedo más o menos. Aún no le meto nada de diseño (colores, bordes redondeados, etc.), armé puro esqueleto para tener la estructura base de las vistas. Todas las vistas vivirán en un apartado ya sea lateral o abajo, o en ambas dependiendo de si se ve en una pantalla grande o pequeña. <br><br>
                 
-                <div class="wireframe-box text-center">
-                    <div class="h-24 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                        [Animación Río]
-                    </div>
-                    <h3 class="font-bold">Módulo: El Río</h3>
-                    <p class="text-xs text-gray-500 mt-2">Estatus: HTML montado, falta animación CSS de lavado de texto.</p>
+            </p>
+        </div>
+
+        <main class="max-w-4xl mx-auto space-y-8">
+            
+            <header class="wireframe-box flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl font-bold uppercase tracking-widest">[ LOGO MI REFUGIO ]</h1>
+                    <p class="text-gray-500 text-sm">v0.1 - Estructura base</p>
                 </div>
+                <div class="text-xs bg-gray-200 px-2 py-1">Menu placeholder</div>
+            </header>
 
-                <div class="wireframe-box text-center">
-                    <div class="h-24 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                        [Animación Macuilí]
+            <section>
+                <h2 class="text-xl font-bold mb-4 bg-gray-300 inline-block px-2">1. Vistas Interactivas (TODO)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                    <div class="wireframe-box text-center">
+                        <div class="h-24 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
+                            [Animación Río]
+                        </div>
+                        <h3 class="font-bold">Módulo: El Río</h3>
+                        <p class="text-xs text-gray-500 mt-2">Estatus: HTML montado, falta animación CSS de lavado de texto.</p>
                     </div>
-                    <h3 class="font-bold">Módulo: Macuilí</h3>
-                    <p class="text-xs text-gray-500 mt-2">Estatus: Lógica de array de frases lista, falta el JS de los pétalos cayendo.</p>
-                </div>
 
-                <div class="wireframe-box text-center">
-                    <div class="h-24 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                        [UI Respiración]
+                    <div class="wireframe-box text-center">
+                        <div class="h-24 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
+                            [Animación Macuilí]
+                        </div>
+                        <h3 class="font-bold">Módulo: Macuilí</h3>
+                        <p class="text-xs text-gray-500 mt-2">Estatus: Lógica de array de frases lista, falta el JS de los pétalos cayendo.</p>
                     </div>
-                    <h3 class="font-bold">Módulo: La Ceiba</h3>
-                    <p class="text-xs text-gray-500 mt-2">Estatus: Pendiente (Armar el timer mañana).</p>
+
+                    <div class="wireframe-box text-center">
+                        <div class="h-24 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
+                            [UI Respiración]
+                        </div>
+                        <h3 class="font-bold">Módulo: La Ceiba</h3>
+                        <p class="text-xs text-gray-500 mt-2">Estatus: Pendiente (Armar el timer mañana).</p>
+                    </div>
+
                 </div>
+            </section>
 
-            </div>
-        </section>
+            <footer class="wireframe-box text-center text-xs text-gray-400">
+                [ FOOTER CON DIRECTORIO DE EMERGENCIA Y TELÉFONOS ] <br>
+                (Pendiente maquetar)
+            </footer>
 
-        
+        </main>
+    </div>
 
-        <!-- FOOTER PLACEHOLDER -->
-        <footer class="wireframe-box text-center text-xs text-gray-400">
-            [ FOOTER CON DIRECTORIO DE EMERGENCIA Y TELÉFONOS ] <br>
-            (Pendiente maquetar)
-        </footer>
-
-    </main>
-
-    <!-- SCRIPT DE PRUEBA API -->
     <script>
+        // --- LÓGICA DE AUTENTICACIÓN DEL PROTOTIPO ---
+        function verificarAcceso() {
+            const pass = document.getElementById('passInput').value.trim();
+            const errorMsg = document.getElementById('login-error');
+            
+            // Verificamos si la contraseña es "Mil" o "jdehesa"
+            if (pass === "Mil" || pass === "jdehesa") {
+                // Ocultar login y mostrar contenido principal
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                // Mostrar mensaje de error
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // --- SCRIPT DE PRUEBA API (Original) ---
         const apiKey = ""; // Runtime inyecta la llave aquí
 
         async function generateApapacho() {
@@ -118,7 +145,6 @@
             outputBox.classList.add('hidden');
             outputText.innerHTML = "";
 
-            // Prompt de Sistema exacto que usaremos en prod
             const systemPrompt = "Eres un asistente compasivo y cálido para personas en Tabasco, México, que sufren de TCA (Trastornos de la Conducta Alimentaria). El usuario te compartirá un sentimiento difícil o de culpa. Tu tarea es darle un 'apapacho' emocional: una respuesta breve (máximo 2-3 oraciones), muy cálida, empática, que fomente la neutralidad corporal y quite la culpa. Usa un tono coloquial y amable del sur de México (Tabasco), como si fueras un amigo cercano o familiar que los quiere mucho (puedes usar palabras de confort como 'corazón', 'tranquilo/a', 'respira'). NUNCA des consejos médicos ni dietéticos. NUNCA hables de peso, calorías, tallas o ejercicio compensatorio. Enfócate exclusivamente en validar su emoción y darle paz mental.";
             
             try {

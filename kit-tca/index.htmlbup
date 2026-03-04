@@ -62,25 +62,7 @@
     </style>
 </head>
 
-<body class="bg-amber-50 dark:bg-stone-950 font-sans text-stone-800 dark:text-stone-200 antialiased min-h-screen flex flex-col md:flex-row pb-20 md:pb-0 transition-colors duration-700 overflow-hidden" id="main-body">
-
-    <div id="welcome-screen" class="fixed inset-0 z-[100] bg-amber-50 dark:bg-stone-950 flex flex-col items-center justify-center p-6 transition-opacity duration-1000 opacity-100">
-        <div class="max-w-md text-center space-y-8">
-            <div class="flex justify-center mb-6">
-                <i data-lucide="heart" class="w-16 h-16 text-amber-500 fill-amber-200 dark:fill-amber-900 animate-pulse"></i>
-            </div>
-            <h1 class="text-4xl font-bold font-serif text-amber-900 dark:text-amber-400">Bienvenid@ a Mi Refugio</h1>
-            <p class="text-lg text-amber-800 dark:text-amber-200/80">
-                Agradecemos de todo corazón que hayas participado en nuestra campaña <strong> "Más que un espejo" </strong> de concientización sobre el bienestar emocional en relación a los trastornos de conducta alimentaria.<br><br>
-                Este es un espacio seguro, diseñado especialmente para ti. Respira profundo, estás a salvo aquí. <br>
-
-            </p>
-            <button onclick="entrarAlRefugio()" class="mt-8 px-8 py-4 bg-amber-600 hover:bg-amber-700 dark:bg-amber-700 dark:hover:bg-amber-600 text-white rounded-full font-bold shadow-lg transition-transform hover:scale-105 active:scale-95 flex items-center justify-center mx-auto gap-2">
-                <span>Entrar al Refugio</span>
-                <i data-lucide="arrow-right" class="w-5 h-5"></i>
-            </button>
-        </div>
-    </div>
+<body class="bg-amber-50 dark:bg-stone-950 font-sans text-stone-800 dark:text-stone-200 antialiased min-h-screen flex flex-col md:flex-row pb-20 md:pb-0 transition-colors duration-700" id="main-body">
 
     <button onclick="toggleTheme()" class="fixed bottom-24 right-4 z-50 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 text-stone-700 dark:text-amber-300 p-3 rounded-full shadow-md transition-transform hover:scale-110 border border-stone-300 dark:border-stone-600" aria-label="Cambiar Tema">
         <i data-lucide="moon" id="theme-icon" class="w-6 h-6"></i>
@@ -291,24 +273,6 @@
     <script>
         lucide.createIcons();
 
-        // --- LÓGICA DE PANTALLA DE BIENVENIDA ---
-        function entrarAlRefugio() {
-            const welcomeScreen = document.getElementById('welcome-screen');
-            const mainBody = document.getElementById('main-body');
-            
-            // Iniciar desvanecimiento
-            welcomeScreen.classList.remove('opacity-100');
-            welcomeScreen.classList.add('opacity-0');
-            
-            // Permitir scroll de nuevo
-            mainBody.classList.remove('overflow-hidden');
-            
-            // Ocultar completamente después de la animación
-            setTimeout(() => {
-                welcomeScreen.classList.add('hidden');
-            }, 1000); // 1 segundo, igual que la clase duration-1000
-        }
-
         // --- LÓGICA DE MODO OSCURO ---
         function toggleTheme() {
             const htmlElement = document.documentElement;
@@ -336,9 +300,7 @@
 
         function switchTab(targetId) {
             const body = document.getElementById('main-body');
-            // Mantenemos overflow-hidden fuera de las clases de color para que no lo reescriba si el modal aún está activo
-            const currentOverflow = body.classList.contains('overflow-hidden') ? 'overflow-hidden' : '';
-            body.className = `font-sans text-stone-800 dark:text-stone-200 antialiased min-h-screen flex flex-col md:flex-row pb-20 md:pb-0 transition-colors duration-700 ${currentOverflow} ${bodyColors[targetId]}`;
+            body.className = `font-sans text-stone-800 dark:text-stone-200 antialiased min-h-screen flex flex-col md:flex-row pb-20 md:pb-0 transition-colors duration-700 ${bodyColors[targetId]}`;
 
             sections.forEach(sec => {
                 const el = document.getElementById(`sec-${sec}`);

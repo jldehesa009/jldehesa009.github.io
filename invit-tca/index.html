@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaña: Más que un espejo - TCA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .blob-bg {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: float 10s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-rose-50 relative overflow-x-hidden flex flex-col items-center justify-center py-12 px-4 sm:p-8">
+
+    <!-- Background Blobs -->
+    <div class="blob-bg bg-purple-300 w-96 h-96 rounded-full top-0 left-0 mix-blend-multiply"></div>
+    <div class="blob-bg bg-rose-300 w-96 h-96 rounded-full bottom-0 right-0 mix-blend-multiply" style="animation-delay: 2s;"></div>
+    <div class="blob-bg bg-orange-200 w-80 h-80 rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mix-blend-multiply" style="animation-delay: 4s;"></div>
+
+    <!-- Main Card -->
+    <main class="glass-effect w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative z-10 fade-in-up">
+        
+        <!-- Top Banner / Header -->
+        <div class="bg-gradient-to-r from-purple-600 to-rose-500 p-6 text-center text-white">
+            <p class="text-sm font-medium tracking-widest uppercase opacity-90 mb-1">Campaña de Salud Mental</p>
+            <div class="flex justify-center items-center gap-2 mb-2">
+                <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+            </div>
+        </div>
+
+        <!-- Content Section -->
+        <div class="p-8 sm:p-12 text-center">
+            
+            <!-- Organized by -->
+            <p class="text-xs sm:text-sm text-gray-500 font-medium mb-4 uppercase tracking-wide fade-in-up delay-100">
+                La Universidad Olmeca y<br>
+                Alumnos de 4to Semestre de Psicología invitan:
+            </p>
+
+            <!-- Main Title -->
+            <div class="fade-in-up delay-200 mb-6">
+                <h1 class="title-font text-5xl sm:text-6xl text-gray-800 font-bold leading-tight mb-2">
+                    Más que <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-rose-500 italic">un espejo</span>
+                </h1>
+                <p class="text-gray-600 text-base sm:text-lg max-w-md mx-auto mt-4">
+                    Descubre el valor que hay más allá de tu reflejo. Hablemos sobre el amor propio y la prevención de los 
+                    <strong class="text-purple-700">Trastornos de la Conducta Alimentaria (TCA)</strong>.
+                </p>
+            </div>
+
+            <!-- Event Details -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8 fade-in-up delay-300">
+                <div class="bg-white/60 rounded-2xl p-4 flex flex-col items-center justify-center border border-rose-100 shadow-sm transition-transform hover:scale-105">
+                    <div class="bg-rose-100 p-3 rounded-full text-rose-600 mb-3">
+                        <i data-lucide="calendar" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Viernes, 10 de Abril</h3>
+                    <p class="text-sm text-gray-500">4:00 PM - 7:00 PM</p>
+                </div>
+                
+                <div class="bg-white/60 rounded-2xl p-4 flex flex-col items-center justify-center border border-purple-100 shadow-sm transition-transform hover:scale-105">
+                    <div class="bg-purple-100 p-3 rounded-full text-purple-600 mb-3">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">Parque de la Comunidad</h3>
+                    <p class="text-sm text-gray-500">Luis Gil Pérez</p>
+                </div>
+            </div>
+
+            <!-- What to expect -->
+            <div class="bg-gray-50/50 rounded-2xl p-6 mb-8 text-left fade-in-up delay-400">
+                <h4 class="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-yellow-500"></i>
+                    ¿Qué encontrarás?
+                </h4>
+                <ul class="text-sm text-gray-600 space-y-2">
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Información clave sobre prevención y señales de alerta de TCA.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Dinámicas interactivas para fortalecer la autoestima.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0"></i>
+                        <span>Un espacio seguro, libre de juicios y lleno de apoyo comunitario.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 fade-in-up delay-400">
+                <button onclick="mostrarMensaje()" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-purple-600 to-rose-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    ¡Te esperamos!
+                </button>
+                
+                <!-- Botón para descargar un archivo predeterminado -->
+                <!-- CAMBIA ESTO: 'ruta_a_tu_archivo/flyer.pdf' por la ruta real de tu archivo en tu servidor -->
+                <a href=https://drive.google.com/uc?export=download&id=1DamgbX5Z6qj76m1HpUriY0kG_w0PIKJJ download="Flyer_Mas_Que_Un_Espejo.pdf" class="w-full sm:w-auto px-8 py-3 bg-white text-purple-600 border border-purple-200 font-semibold rounded-full shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-5 h-5"></i>
+                    Descargar Flyer
+                </a>
+            </div>
+
+            <!-- Credits -->
+            <div class="mt-8 pt-6 border-t border-gray-200/50 fade-in-up delay-400">
+                <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">Dirección del Proyecto</p>
+                <p class="text-sm font-medium text-gray-700">Odalis de los Milagros Gómez Priego</p>
+                <p class="text-sm font-medium text-gray-700">&</p>
+                <p class="text-sm font-medium text-gray-700">Isis Elisa de Dios Hernández</p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Web Developer Credit -->
+    <footer class="mt-8 text-center relative z-10 fade-in-up delay-400">
+        <p class="text-xs text-gray-500 font-medium tracking-wide">
+            Diseño y Desarrollo Web por <span class="text-purple-600 font-bold hover:text-rose-500 transition-colors">Jorge Dehesa</span>
+        </p>
+    </footer>
+
+    <!-- Custom Modal instead of alert -->
+    <div id="modal" class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-sm w-11/12 transform scale-95 transition-transform duration-300 text-center relative" id="modal-content">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="calendar-check" class="w-8 h-8 text-green-600"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2 title-font">¡Excelente!</h3>
+            <p class="text-gray-600 mb-6 text-sm">Nos vemos el viernes 10 de abril en el parque de Luis Gil Pérez. ¡No faltes!</p>
+            <button onclick="cerrarMensaje()" class="w-full px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-xl transition-colors">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Modal Logic
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function mostrarMensaje() {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function cerrarMensaje() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>

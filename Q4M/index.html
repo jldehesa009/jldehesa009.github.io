@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 Preguntas — Conexión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#efe6d4;
+    --ink-dim:#c9bda3;
+    --bg:#0f0d0c;
+    --bg-panel:hsl(24, 12%, 8%);
+    --ember:#c1502e;
+    --gold:#a8863f;
+    --line: rgba(239,230,212,0.14);
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(193,80,46,0.10), transparent 45%),
+      radial-gradient(ellipse at 90% 110%, rgba(168,134,63,0.08), transparent 50%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:24px;
+  }
+  .stage{
+    width:100%;
+    max-width:560px;
+  }
+  .header{
+    text-align:center;
+    margin-bottom:22px;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+  .title{
+    font-size:34px;
+    font-weight:600;
+    margin:6px 0 4px;
+    letter-spacing:0.01em;
+  }
+  .subtitle{
+    font-size:16px;
+    color:var(--ink-dim);
+    font-style:italic;
+  }
+
+  /* Ticket / pass card */
+  .pass{
+    position:relative;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:38px 34px 30px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  .pass::before, .pass::after{
+    content:"";
+    position:absolute;
+    width:26px; height:26px;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-radius:50%;
+    top:50%;
+    transform:translateY(-50%);
+  }
+  .pass::before{ left:-13px; }
+  .pass::after{ right:-13px; }
+
+  .track{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.15em;
+    color:var(--gold);
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+  }
+  .track .cat{ color:var(--ink-dim); text-transform:uppercase; }
+
+  .progress-track{
+    height:2px;
+    background:var(--line);
+    border-radius:2px;
+    margin-bottom:26px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--ember), var(--gold));
+    width:0%;
+    transition:width 0.4s ease;
+  }
+
+  .question{
+    font-size:26px;
+    line-height:1.35;
+    min-height:100px;
+    margin-bottom:22px;
+  }
+
+  textarea{
+    width:100%;
+    min-height:110px;
+    background:transparent;
+    border:none;
+    border-top:1px dashed var(--line);
+    border-bottom:1px dashed var(--line);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    font-style:italic;
+    padding:14px 2px;
+    resize:vertical;
+    outline:none;
+  }
+  textarea::placeholder{ color:rgba(239,230,212,0.32); }
+  textarea:focus{ border-color: var(--ember); }
+
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:26px;
+  }
+  button{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    background:none;
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:11px 18px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:all 0.2s ease;
+  }
+  button:hover:not(:disabled){
+    border-color:var(--ember);
+    color:var(--ember);
+  }
+  button:disabled{
+    opacity:0.3;
+    cursor:default;
+  }
+  .btn-primary{
+    background:var(--ember);
+    border-color:var(--ember);
+    color:#100c0a;
+    font-weight:700;
+  }
+  .btn-primary:hover{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:#100c0a !important;
+  }
+
+  .footer-note{
+    text-align:center;
+    margin-top:18px;
+    font-size:13px;
+    color:var(--ink-dim);
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.04em;
+  }
+
+  /* Intro screen */
+  .intro p{ font-size:19px; line-height:1.6; color:var(--ink-dim); }
+  .start-row{ display:flex; justify-content:center; margin-top:26px; }
+
+  /* End screen */
+  .end .title{ font-size:28px; }
+  .end p{ color:var(--ink-dim); font-size:18px; line-height:1.6; }
+  .end-actions{ display:flex; gap:10px; justify-content:center; margin-top:24px; flex-wrap:wrap; }
+
+  .hidden{ display:none !important; }
+
+  @media (max-width:480px){
+    .question{ font-size:22px; }
+    .title{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="header">
+    <div class="eyebrow">Conexión — lado A / lado B</div>
+    <div class="title">100 preguntas</div>
+    <div class="subtitle">para responder sin prisa</div>
+  </div>
+
+  <div class="pass" id="pass">
+
+    <!-- INTRO -->
+    <div id="screen-intro" class="intro">
+      <p>Esto no es un examen ni un formulario cualquiera. Es un mixtape de preguntas — cien pistas, una por una, pensadas para que te detengas un momento en cada una antes de contestar.</p>
+      <p>Ve a tu ritmo. Puedes contestar todas de un jalón o dejarlo para varios días. Al final puedes descargar tus respuestas para guardarlas o mandármelas.</p>
+      <div class="start-row">
+        <button class="btn-primary" onclick="startDeck()">Dale play ▷</button>
+      </div>
+    </div>
+
+    <!-- QUESTION SCREEN -->
+    <div id="screen-question" class="hidden">
+      <div class="track">
+        <span id="track-number">PISTA 01/100</span>
+        <span class="cat" id="track-cat">—</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="question" id="question-text">—</div>
+      <textarea id="answer-box" placeholder="Escribe aquí, sin apuro…"></textarea>
+      <div class="controls">
+        <button id="btn-prev" onclick="prevQ()">◁ anterior</button>
+        <button id="btn-next" onclick="nextQ()">siguiente ▷</button>
+      </div>
+      <div class="footer-note">tus respuestas se quedan solo en esta sesión — descárgalas al terminar</div>
+    </div>
+
+    <!-- END SCREEN -->
+    <div id="screen-end" class="hidden end">
+      <div class="eyebrow">fin del lado B</div>
+      <div class="title">Eso es todo, por ahora</div>
+      <p>Gracias por tomarte el tiempo de contestar esto de verdad. Guarda tus respuestas o mándamelas cuando quieras — no hay prisa, nunca la ha habido.</p>
+      <div class="end-actions">
+        <button class="btn-primary" onclick="downloadAnswers()">Descargar respuestas ⬇</button>
+        <button onclick="goToQuestion(0)">Revisar de nuevo</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const questions = [
+  {cat:"Lo que sientes", q:"¿Cuándo sentiste que ya no era un \"me gusta\" sino algo más fuerte?"},
+  {cat:"Lo que sientes", q:"¿Qué es lo que más te tranquiliza de estar conmigo?"},
+  {cat:"Lo que sientes", q:"¿Hay algo que sientes por mí que nunca me has dicho con palabras?"},
+  {cat:"Lo que sientes", q:"¿Qué canción te hace pensar en nosotros sin que te lo proponga?"},
+  {cat:"Lo que sientes", q:"¿En qué momento del día piensas más en mí?"},
+  {cat:"Lo que sientes", q:"¿Qué es lo que más te ha sorprendido de quererme?"},
+  {cat:"Lo que sientes", q:"¿Cómo describirías lo que sientes por mí sin usar la palabra \"amor\"?"},
+  {cat:"Lo que sientes", q:"¿Qué parte de ti sientes que solo yo conozco?"},
+  {cat:"Lo que sientes", q:"¿Hay algo que te dé miedo de lo que sientes por mí?"},
+  {cat:"Lo que sientes", q:"¿Qué significa para ti sentirte segura conmigo?"},
+
+  {cat:"Recuerdos", q:"¿Cuál es el recuerdo que más atesoras de nosotros?"},
+  {cat:"Recuerdos", q:"¿Qué momento pequeño, que yo tal vez ni recuerdo, se te quedó grabado?"},
+  {cat:"Recuerdos", q:"¿Cuándo te reíste más fuerte conmigo?"},
+  {cat:"Recuerdos", q:"¿Hay un día que te gustaría vivir exactamente igual otra vez?"},
+  {cat:"Recuerdos", q:"¿Qué fue lo primero que notaste de mí?"},
+  {cat:"Recuerdos", q:"¿Cuál fue tu primera impresión real, no la que me dijiste?"},
+  {cat:"Recuerdos", q:"¿Hay algo que hice que te hizo confiar en mí de verdad?"},
+  {cat:"Recuerdos", q:"¿Qué conversación nuestra recuerdas más?"},
+  {cat:"Recuerdos", q:"¿Cuál ha sido el silencio más cómodo que hemos compartido?"},
+  {cat:"Recuerdos", q:"¿Qué detalle mío te enamoró sin que te dieras cuenta al principio?"},
+
+  {cat:"El futuro", q:"¿Cómo te imaginas una tarde común y corriente conmigo dentro de varios años?"},
+  {cat:"El futuro", q:"¿Qué te gustaría construir conmigo que no sea material?"},
+  {cat:"El futuro", q:"¿Hay un lugar al que sueñas ir conmigo algún día?"},
+  {cat:"El futuro", q:"¿Qué tradición te gustaría que tuviéramos solo nosotros dos?"},
+  {cat:"El futuro", q:"¿Cómo te imaginas envejeciendo, si es que lo piensas?"},
+  {cat:"El futuro", q:"¿Qué tipo de casa te gustaría que tuviéramos algún día?"},
+  {cat:"El futuro", q:"¿Hay algo que quieras enseñarme algún día?"},
+  {cat:"El futuro", q:"¿Qué te gustaría que aprendiéramos juntos?"},
+  {cat:"El futuro", q:"¿Cómo te gustaría que fuera un aniversario ideal nuestro?"},
+  {cat:"El futuro", q:"¿Qué es algo que quieres lograr y en lo que te gustaría que yo estuviera cerca?"},
+
+  {cat:"El amor en general", q:"¿Qué crees que hace que un amor dure?"},
+  {cat:"El amor en general", q:"¿Crees que el amor se elige o simplemente pasa?"},
+  {cat:"El amor en general", q:"¿Qué es lo más difícil de amar a alguien, para ti?"},
+  {cat:"El amor en general", q:"¿Cómo sabes cuándo alguien te ama de verdad, más allá de lo que dice?"},
+  {cat:"El amor en general", q:"¿Qué gesto pequeño crees que dice más que un \"te amo\"?"},
+  {cat:"El amor en general", q:"¿Crees que el amor cambia con el tiempo? ¿Cómo?"},
+  {cat:"El amor en general", q:"¿Qué es lo que más valoras en una relación?"},
+  {cat:"El amor en general", q:"¿Qué tan diferente es el amor que sientes ahora al que imaginabas de niña?"},
+  {cat:"El amor en general", q:"¿Qué necesitas sentir para saber que alguien te elige de verdad?"},
+  {cat:"El amor en general", q:"¿Qué crees que es más importante: la pasión o la calma?"},
+
+  {cat:"Sobre mí", q:"¿Qué es lo que más admiras de mí, aunque nunca me lo hayas dicho?"},
+  {cat:"Sobre mí", q:"¿Hay algo mío que te haga sentir orgullosa?"},
+  {cat:"Sobre mí", q:"¿Qué crees que es lo que más me cuesta mostrar de mí?"},
+  {cat:"Sobre mí", q:"¿Qué manía mía te parece tierna en vez de molesta?"},
+  {cat:"Sobre mí", q:"¿Cómo describirías mi forma de quererte a alguien que no me conoce?"},
+  {cat:"Sobre mí", q:"¿Qué crees que necesito escuchar más seguido?"},
+  {cat:"Sobre mí", q:"¿Qué es algo mío que has aprendido a querer con el tiempo?"},
+  {cat:"Sobre mí", q:"¿Cómo crees que ha cambiado mi forma de amarte desde que empezamos?"},
+  {cat:"Sobre mí", q:"¿Qué te hace sentir que realmente te entiendo?"},
+  {cat:"Sobre mí", q:"¿Hay algo que crees que yo no sé de mí mismo, pero tú sí ves?"},
+
+  {cat:"Sobre ti", q:"¿Qué es lo que más te gusta de quién eres cuando estás conmigo?"},
+  {cat:"Sobre ti", q:"¿Cuál es tu manera favorita de sentirte amada?"},
+  {cat:"Sobre ti", q:"¿Qué necesitas cuando estás triste, aunque no lo pidas?"},
+  {cat:"Sobre ti", q:"¿Qué te hace sentir realmente en paz?"},
+  {cat:"Sobre ti", q:"¿Cuál es un miedo tuyo que nunca me habías contado?"},
+  {cat:"Sobre ti", q:"¿Qué es algo que te enorgullece de ti misma?"},
+  {cat:"Sobre ti", q:"¿Qué canción sientes que te representa ahora mismo?"},
+  {cat:"Sobre ti", q:"¿Qué es algo que te gustaría cambiar de ti, si pudieras?"},
+  {cat:"Sobre ti", q:"¿Cuál ha sido tu momento de mayor crecimiento este año?"},
+  {cat:"Sobre ti", q:"¿Qué te hace sentir plenamente tú misma?"},
+
+  {cat:"Más profundo", q:"¿Qué es lo que más te cuesta perdonar, en general?"},
+  {cat:"Más profundo", q:"¿Hay algo que hayas querido decirme y no has encontrado el momento?"},
+  {cat:"Más profundo", q:"¿Qué es lo que más te asusta de amar a alguien tanto?"},
+  {cat:"Más profundo", q:"¿Cómo te gustaría que te consolara cuando algo te duele?"},
+  {cat:"Más profundo", q:"¿Qué necesitas de mí en los días malos?"},
+  {cat:"Más profundo", q:"¿Hay algo que sientes que no te he preguntado y te gustaría que preguntara?"},
+  {cat:"Más profundo", q:"¿Qué tan fácil o difícil es para ti confiar en las personas?"},
+  {cat:"Más profundo", q:"¿Qué es algo que te da paz cuando piensas en nosotros?"},
+  {cat:"Más profundo", q:"¿Hay una versión tuya del pasado que te gustaría abrazar?"},
+  {cat:"Más profundo", q:"¿Qué necesitas sentir para bajar completamente la guardia con alguien?"},
+
+  {cat:"Ligero", q:"Si pudieras revivir un solo día de tu vida, ¿cuál sería?"},
+  {cat:"Ligero", q:"¿Qué es lo más random que te hace feliz?"},
+  {cat:"Ligero", q:"¿Qué olor te transporta a un recuerdo bonito?"},
+  {cat:"Ligero", q:"Si tuvieras que describirme con un objeto, ¿cuál sería?"},
+  {cat:"Ligero", q:"¿Qué palabra sientes que me representa?"},
+  {cat:"Ligero", q:"¿Cuál ha sido tu comida favorita que hemos compartido?"},
+  {cat:"Ligero", q:"Si pudiéramos teletransportarnos a cualquier lugar ahora mismo, ¿a dónde irías?"},
+  {cat:"Ligero", q:"¿Qué es algo que te hace reír incluso pensándolo sola?"},
+  {cat:"Ligero", q:"¿Qué app o rutina tuya crees que no podrías dejar?"},
+  {cat:"Ligero", q:"Si tuvieras un superpoder solo para usarlo conmigo, ¿cuál sería?"},
+
+  {cat:"Nosotros", q:"¿Qué crees que nos hace diferentes a otras parejas?"},
+  {cat:"Nosotros", q:"¿Qué es algo que hemos superado juntos que te enorgullece?"},
+  {cat:"Nosotros", q:"¿Qué palabra usarías para describir esta etapa nuestra?"},
+  {cat:"Nosotros", q:"¿Qué es lo que más agradeces de que yo esté en tu vida?"},
+  {cat:"Nosotros", q:"¿Qué crees que hemos aprendido el uno del otro?"},
+  {cat:"Nosotros", q:"¿Cómo sientes que hemos cambiado desde que empezamos?"},
+  {cat:"Nosotros", q:"¿Qué es algo que te gustaría que habláramos más seguido?"},
+  {cat:"Nosotros", q:"¿Qué crees que nos falta por descubrir el uno del otro?"},
+  {cat:"Nosotros", q:"¿Qué es lo que más valoras de cómo discutimos o resolvemos algo?"},
+  {cat:"Nosotros", q:"¿Qué crees que representa nuestra canción o playlist para ti?"},
+
+  {cat:"Cierre", q:"Si tuvieras que resumir lo que sientes por mí en una sola frase, ¿cuál sería?"},
+  {cat:"Cierre", q:"¿Qué es lo que más te gustaría que nunca cambiara entre nosotros?"},
+  {cat:"Cierre", q:"¿Qué le dirías a la Mily de hace unos años sobre el amor que ibas a encontrar?"},
+  {cat:"Cierre", q:"¿Qué es algo que quieres que sepa siempre, pase lo que pase?"},
+  {cat:"Cierre", q:"¿Qué significa \"hogar\" para ti ahora?"},
+  {cat:"Cierre", q:"¿Qué es lo que más te gustaría que yo entendiera de ti sin que lo tengas que explicar?"},
+  {cat:"Cierre", q:"¿Qué crees que hace que valga la pena esperar por algo, o por alguien?"},
+  {cat:"Cierre", q:"¿Qué es una promesa silenciosa que sientes que te he cumplido?"},
+  {cat:"Cierre", q:"¿Qué te gustaría que yo supiera de tu corazón, que tal vez ni tú sabes cómo explicar?"},
+  {cat:"Cierre", q:"Si esto fuera una carta y no una pregunta, ¿qué te gustaría que dijera la última línea?"}
+];
+
+let current = 0;
+const answers = new Array(questions.length).fill("");
+
+function pad(n){ return n.toString().padStart(2,"0"); }
+
+function startDeck(){
+  document.getElementById('screen-intro').classList.add('hidden');
+  document.getElementById('screen-question').classList.remove('hidden');
+  document.getElementById('screen-end').classList.add('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const item = questions[current];
+  document.getElementById('track-number').textContent = `PISTA ${pad(current+1)}/100`;
+  document.getElementById('track-cat').textContent = item.cat;
+  document.getElementById('question-text').textContent = item.q;
+  document.getElementById('answer-box').value = answers[current];
+  document.getElementById('progress-fill').style.width = ((current+1)/questions.length*100) + "%";
+  document.getElementById('btn-prev').disabled = current === 0;
+  document.getElementById('btn-next').textContent = current === questions.length-1 ? "terminar ▷" : "siguiente ▷";
+}
+
+function saveCurrentAnswer(){
+  answers[current] = document.getElementById('answer-box').value;
+}
+
+function nextQ(){
+  saveCurrentAnswer();
+  if(current < questions.length - 1){
+    current++;
+    renderQuestion();
+  } else {
+    showEnd();
+  }
+}
+
+function prevQ(){
+  saveCurrentAnswer();
+  if(current > 0){
+    current--;
+    renderQuestion();
+  }
+}
+
+function goToQuestion(i){
+  document.getElementById('screen-end').classList.add('hidden');
+  document.getElementById('screen-question').classList.remove('hidden');
+  current = i;
+  renderQuestion();
+}
+
+function showEnd(){
+  document.getElementById('screen-question').classList.add('hidden');
+  document.getElementById('screen-end').classList.remove('hidden');
+}
+
+function downloadAnswers(){
+  saveCurrentAnswer();
+  let text = "100 preguntas — Conexión\n\n";
+  questions.forEach((item, i) => {
+    text += `Pista ${pad(i+1)} · ${item.cat}\n`;
+    text += `${item.q}\n`;
+    text += `→ ${answers[i] && answers[i].trim() ? answers[i].trim() : "(sin responder)"}\n\n`;
+  });
+  const blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = "mis-respuestas-conexion.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>

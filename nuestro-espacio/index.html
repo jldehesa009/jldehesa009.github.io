@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nuestro espacio privado. Un HUB para celebrar nuestra historia.">
+    
+    <meta property="og:title" content="Jorge & Mily - Nuestro HUB Privado">
+    <meta property="og:description" content="Un espacio único para nuestros recuerdos, fechas y momentos.">
+    <meta property="og:type" content="website">
+    
+    <title>Jorge & Mily | Home</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <div id="loader" class="loader-container">
+        <div class="heart-loader"></div>
+    </div>
+
+    <header class="navbar glass">
+        <div class="nav-container">
+            <a href="index.html" class="logo">J<span>&</span>M</a>
+            <nav class="nav-links">
+                <a href="pages/contador.html">Contador</a>
+                <a href="pages/capsula.html">Cápsula</a>
+                <a href="pages/timeline.html">Timeline</a>
+                <a href="pages/trivia.html">Trivia</a>
+                <a href="pages/citas.html">Citas</a>
+                <a href="pages/album.html">Álbum</a>
+            </nav>
+            <div class="nav-controls">
+                <button id="theme-toggle" aria-label="Cambiar tema" class="icon-btn">
+                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                </button>
+                <button class="hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <canvas id="particles-canvas"></canvas>
+            <div class="hero-content observe-fade">
+                <h1 class="hero-title">Jorge <span class="gold-accent">&</span> Mily</h1>
+                <div class="phrase-container">
+                    <p id="romantic-phrase" class="hero-subtitle">Nuestro pequeño rincón en el mundo.</p>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#modules" class="btn btn-primary">Explorar</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Descubre</span>
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="modules" class="modules-section">
+            <div class="container">
+                <h2 class="section-title observe-fade">Nuestra Historia</h2>
+                <div class="grid-modules">
+                    <a href="pages/contador.html" class="module-card glass observe-fade">
+                        <div class="card-icon">⏳</div>
+                        <h3>Contador</h3>
+                        <p>El tiempo que llevamos escribiendo nuestra historia juntos.</p>
+                    </a>
+                    
+                    <a href="pages/capsula.html" class="module-card glass observe-fade" style="transition-delay: 0.1s;">
+                        <div class="card-icon">✉️</div>
+                        <h3>Cápsula</h3>
+                        <p>Mensajes al futuro que esperan su momento para brillar.</p>
+                    </a>
+
+                    <a href="pages/timeline.html" class="module-card glass observe-fade" style="transition-delay: 0.2s;">
+                        <div class="card-icon">🎫</div>
+                        <h3>Setlist</h3>
+                        <p>Los hitos más importantes de nuestro recorrido.</p>
+                    </a>
+
+                    <a href="pages/trivia.html" class="module-card glass observe-fade" style="transition-delay: 0.3s;">
+                        <div class="card-icon">🎲</div>
+                        <h3>Trivia</h3>
+                        <p>¿Qué tanto nos conocemos? Un pequeño desafío.</p>
+                    </a>
+
+                    <a href="pages/citas.html" class="module-card glass observe-fade" style="transition-delay: 0.4s;">
+                        <div class="card-icon">🎰</div>
+                        <h3>Citas</h3>
+                        <p>¿No sabes qué haremos hoy? Deja que el destino decida.</p>
+                    </a>
+
+                    <a href="pages/album.html" class="module-card glass observe-fade" style="transition-delay: 0.5s;">
+                        <div class="card-icon">📸</div>
+                        <h3>Backstage</h3>
+                        <p>Nuestra galería de fotos bajo las luces de nuestra vida.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer glass">
+        <div class="container footer-content">
+            <p>Hecho con amor. Jorge & Mily &copy; <span id="year"></span></p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" class="glass icon-btn" aria-label="Volver arriba">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generador de citas aleatorias. Deja que el destino decida nuestro plan de hoy.">
+    <title>Jorge & Mily | Generador de Citas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/citas.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <header class="navbar glass">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">J<span>&</span>M</a>
+            <nav class="nav-links">
+                <a href="contador.html">Contador</a>
+                <a href="capsula.html">Cápsula</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="trivia.html">Trivia</a>
+                <a href="citas.html" class="active">Citas</a>
+                <a href="album.html">Álbum</a>
+            </nav>
+            <div class="nav-controls">
+                <button class="hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <section class="slot-section">
+            <div class="container text-center">
+                <div class="header-title observe-fade">
+                    <h1>Nuestra Próxima <span class="gold-accent">Aventura</span></h1>
+                    <p>¿No sabes qué haremos hoy? Presiona el botón y deja que el destino decida por nosotros.</p>
+                </div>
+
+                <!-- Máquina Tragamonedas -->
+                <div class="slot-machine-wrapper observe-fade">
+                    <div class="slot-machine glass">
+                        <!-- Decoración superior -->
+                        <div class="slot-lights">
+                            <span class="light"></span>
+                            <span class="light"></span>
+                            <span class="light"></span>
+                            <span class="light"></span>
+                            <span class="light"></span>
+                        </div>
+                        
+                        <!-- Ventana del rodillo -->
+                        <div class="slot-window">
+                            <!-- Línea indicadora central -->
+                            <div class="slot-indicator"></div>
+                            
+                            <ul id="slot-reel" class="slot-reel">
+                                <!-- El primer elemento por defecto -->
+                                <li class="slot-item"><span>Presiona Girar</span></li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Decoración inferior -->
+                        <div class="slot-lights bottom">
+                            <span class="light"></span>
+                            <span class="light"></span>
+                            <span class="light"></span>
+                            <span class="light"></span>
+                            <span class="light"></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Botón y controles -->
+                    <div class="slot-controls">
+                        <button id="spin-btn" class="btn btn-primary spin-btn">
+                            <span class="btn-text">GIRAR</span>
+                            <span class="btn-icon">🎰</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Resultado Final (Aparece al terminar) -->
+                <div id="result-display" class="result-display glass hide">
+                    <h2>¡Tenemos un plan!</h2>
+                    <h3 id="result-text" class="result-text gold-accent">Cargando...</h3>
+                    <p>Prepárate, va a ser increíble.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Audio para el giro de ruleta (Opcional) -->
+    <audio id="spin-sound" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3" preload="auto"></audio>
+    <audio id="win-sound" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" preload="auto"></audio>
+
+    <footer class="footer glass">
+        <div class="container footer-content">
+            <p>Hecho con amor. Jorge & Mily &copy; <span id="year"></span></p>
+        </div>
+    </footer>
+    
+    <script type="module" src="../js/auth.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/citas.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mensajes al futuro. Cápsula del tiempo privada.">
+    <title>Jorge & Mily | Cápsula del Tiempo</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/capsula.css">
+</head>
+<body>
+    <header class="navbar glass">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">J<span>&</span>M</a>
+            <nav class="nav-links">
+                <a href="contador.html">Contador</a>
+                <a href="capsula.html" class="active" id="nav-capsula">Cápsula <span class="badge-notif hide"></span></a>
+                <a href="timeline.html">Timeline</a>
+                <a href="trivia.html">Trivia</a>
+                <a href="citas.html">Citas</a>
+                <a href="album.html">Álbum</a>
+            </nav>
+            <div class="nav-controls">
+                <button class="hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <section class="capsule-header text-center">
+            <div class="container observe-fade">
+                <h1>Cápsula del <span class="gold-accent">Tiempo</span></h1>
+                <p>Escribe un mensaje hoy, descúbrelo en el futuro. Los sobres están mágicamente sellados hasta su fecha.</p>
+            </div>
+        </section>
+
+        <section class="capsule-form-section">
+            <div class="container">
+                <div class="form-wrapper glass observe-fade">
+                    <h2>Nueva Carta al Futuro</h2>
+                    <form id="capsule-form">
+                        <div class="form-group">
+                            <label for="capsule-title">Título del mensaje</label>
+                            <input type="text" id="capsule-title" required placeholder="Ej: Para cuando te gradúes...">
+                        </div>
+                        <div class="form-group">
+                            <label for="capsule-date">Fecha de apertura</label>
+                            <input type="date" id="capsule-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="capsule-content">Tu mensaje</label>
+                            <textarea id="capsule-content" rows="5" required placeholder="Escribe algo hermoso para Mily..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Sellar Cápsula</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="capsules-gallery">
+            <div class="container">
+                <h3 class="section-title observe-fade">Nuestras Cápsulas</h3>
+                <div id="capsules-grid" class="capsules-grid">
+                    </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="letter-modal" class="modal-overlay hide">
+        <div class="modal-content glass">
+            <button id="close-modal" class="icon-btn close-btn">&times;</button>
+            <h3 id="modal-title" class="modal-title"></h3>
+            <p id="modal-date" class="modal-date gold-accent"></p>
+            <div class="letter-body">
+                <p id="modal-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast glass hide">
+        <span id="toast-message"></span>
+    </div>
+
+    <footer class="footer glass">
+        <div class="container footer-content">
+            <p>Hecho con amor. Jorge & Mily &copy; <span id="year"></span></p>
+        </div>
+    </footer>
+
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/presence.js"></script>
+    
+    <script type="module" src="../js/capsula.js"></script>
+    
+    <script src="../js/app.js"></script>
+</body>
+</html>

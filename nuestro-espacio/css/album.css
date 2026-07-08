@@ -1,0 +1,289 @@
+/* ==========================================================================
+   ESPECÍFICOS DEL ÁLBUM DE FOTOS
+   ========================================================================== */
+.album-header {
+    margin-bottom: 3rem;
+}
+
+.album-header h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 0.5rem;
+}
+
+.album-header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+/* ==========================================================================
+   FILTROS DE GALERÍA
+   ========================================================================== */
+.gallery-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--text-color);
+    color: var(--bg-color);
+    border-color: var(--text-color);
+}
+
+[data-theme="dark"] .filter-btn:hover,
+[data-theme="dark"] .filter-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+/* ==========================================================================
+   GRID DE IMÁGENES Y FORMULARIO
+   ========================================================================== */
+.gallery-section {
+    padding-bottom: 5rem;
+}
+
+/* AQUÍ CONTROLAS EL TAMAÑO DE LAS FOTOS */
+#album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.upload-section {
+    position: relative;
+    z-index: 10;
+    margin-bottom: 3rem;
+}
+
+/* Las tarjetas de las fotos */
+.photo-card {
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+}
+
+.photo-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.photo-frame {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transition: transform 0.5s ease;
+}
+
+.photo-card:hover .photo-frame img {
+    transform: scale(1.08); 
+}
+
+.photo-info {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.photo-caption {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+.photo-meta {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    font-style: italic;
+    color: var(--accent);
+}
+
+/* Botón de examinar archivo */
+input[type="file"] {
+    padding: 0.8rem;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--primary-dark);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background 0.3s ease;
+    margin-right: 15px;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--accent);
+}
+
+/* ==========================================================================
+   LIGHTBOX DEFINITIVO
+   ========================================================================== */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity var(--transition-fast);
+}
+
+.lightbox.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+.lightbox-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    height: 90%;
+    padding: 20px;
+}
+
+.lightbox-image-container {
+    position: relative;
+    max-width: 80%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#lightbox-img {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    opacity: 1;
+}
+
+.lightbox-caption {
+    color: #fff;
+    margin-top: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    text-align: center;
+    font-style: italic;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.lightbox-nav {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    position: absolute;
+    z-index: 3;
+}
+
+.lightbox-nav:hover {
+    background: var(--accent);
+    transform: scale(1.1);
+}
+
+.lightbox-nav.prev {
+    left: 20px;
+}
+
+.lightbox-nav.next {
+    right: 20px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: #fff;
+    font-size: 2.5rem;
+    z-index: 4;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: var(--accent);
+    transform: scale(1.2) rotate(90deg);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (LIGHTBOX MÓVIL)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .lightbox-nav {
+        display: none; 
+    }
+    
+    .lightbox-image-container {
+        max-width: 95%;
+    }
+}

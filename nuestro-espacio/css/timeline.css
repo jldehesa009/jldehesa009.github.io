@@ -1,0 +1,253 @@
+/* ==========================================================================
+   ESPECÍFICOS DEL TIMELINE
+   ========================================================================== */
+.page-container {
+    padding-top: 120px;
+    min-height: 100vh;
+}
+
+.timeline-header {
+    margin-bottom: 5rem;
+}
+
+.timeline-header h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 0.5rem;
+}
+
+.timeline-header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   CONTENEDOR DE LA LÍNEA DE TIEMPO
+   ========================================================================== */
+.timeline-section {
+    padding-bottom: 5rem;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* La línea de fondo (apagada) */
+.timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: var(--glass-border);
+    transform: translateX(-50%);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+[data-theme="dark"] .timeline-line {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* La línea que se ilumina con el scroll */
+.timeline-line-progress {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 0%; /* Se actualiza con JS */
+    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    transform: translateX(-50%);
+    border-radius: 4px;
+    z-index: 2;
+    box-shadow: 0 0 15px var(--accent);
+    transition: height 0.1s ease-out;
+}
+
+/* ==========================================================================
+   ITEMS DEL TIMELINE
+   ========================================================================== */
+.timeline-item {
+    position: relative;
+    width: 100%;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 3;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item.left {
+    justify-content: flex-start;
+}
+
+/* Punto indicador en la línea */
+.timeline-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: var(--bg-color);
+    border: 4px solid var(--glass-border);
+    border-radius: 50%;
+    z-index: 4;
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+/* Estado activo del punto (añadido por JS) */
+.timeline-dot.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent), inset 0 0 5px var(--accent);
+    background-color: var(--primary);
+}
+
+/* Contenido / Tarjeta */
+.timeline-content {
+    width: 45%;
+    padding: 2rem;
+    border-radius: 20px;
+    position: relative;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] .timeline-content:hover {
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+/* Triángulo que apunta a la línea central */
+.timeline-item.left .timeline-content::before,
+.timeline-item.right .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-style: solid;
+    border-width: 10px;
+}
+
+.timeline-item.left .timeline-content::before {
+    right: -20px;
+    border-color: transparent transparent transparent var(--glass-border);
+}
+
+.timeline-item.right .timeline-content::before {
+    left: -20px;
+    border-color: transparent var(--glass-border) transparent transparent;
+}
+
+/* Detalles del Contenido */
+.track-number {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.timeline-date {
+    font-family: var(--font-heading);
+    font-style: italic;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+[data-theme="dark"] .timeline-date {
+    color: var(--primary);
+}
+
+.timeline-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    filter: brightness(0.9);
+    transition: filter var(--transition-fast);
+}
+
+.timeline-img:hover {
+    filter: brightness(1.1);
+}
+
+.timeline-img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: rgba(0,0,0,0.05);
+    border: 2px dashed var(--glass-border);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    text-align: center;
+    padding: 1rem;
+}
+
+[data-theme="dark"] .timeline-img-placeholder {
+    background: rgba(255,255,255,0.02);
+}
+
+.timeline-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (Mobile First Adjustments)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .timeline-line,
+    .timeline-line-progress {
+        left: 20px;
+    }
+
+    .timeline-item {
+        justify-content: flex-end;
+    }
+
+    .timeline-item.left {
+        justify-content: flex-end;
+    }
+
+    .timeline-dot {
+        left: 20px;
+    }
+
+    .timeline-content {
+        width: calc(100% - 60px);
+    }
+
+    /* Ajustar las flechitas del glassmorphism */
+    .timeline-item.left .timeline-content::before {
+        left: -20px;
+        right: auto;
+        border-color: transparent var(--glass-border) transparent transparent;
+    }
+}

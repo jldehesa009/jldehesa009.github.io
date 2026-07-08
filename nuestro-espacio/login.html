@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acceso privado.">
+    <title>Acceso | Nuestro Espacio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-body">
+    <canvas id="particles-canvas"></canvas>
+
+    <main class="login-container">
+        <div class="login-card glass observe-fade is-visible">
+            <div class="login-header">
+                <h1 class="logo">J<span class="gold-accent">&</span>M</h1>
+                <p>Solo para nosotros.</p>
+            </div>
+
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" required autocomplete="email" placeholder="tu@correo.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña secreta</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+
+                <div id="error-message" class="error-message hide">Credenciales incorrectas.</div>
+
+                <button type="submit" id="login-btn" class="btn btn-primary w-100">
+                    <span id="btn-text">Entrar al HUB</span>
+                    <div id="btn-loader" class="mini-loader hide"></div>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

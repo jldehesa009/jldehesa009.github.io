@@ -28,22 +28,31 @@
             <a href="index.html" class="logo">J<span>&</span>M</a>
             <nav class="nav-links">
                 <a href="pages/contador.html">Contador</a>
-                <a href="pages/capsula.html">Cápsula</a>
+                <a href="pages/capsula.html" id="nav-capsula">Cápsula <span class="badge-notif hide"></span></a>
                 <a href="pages/timeline.html">Timeline</a>
                 <a href="pages/trivia.html">Trivia</a>
                 <a href="pages/citas.html">Citas</a>
                 <a href="pages/album.html">Álbum</a>
             </nav>
             <div class="nav-controls">
+                <div class="presence-indicator hide" id="presence-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text" id="status-text">Conectando...</span>
+                </div>
+
                 <button id="theme-toggle" aria-label="Cambiar tema" class="icon-btn">
-                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    </button>
+                
+                <button id="logout-btn" class="icon-btn logout-btn" aria-label="Cerrar sesión" title="Cerrar sesión">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                 </button>
+
                 <button class="hamburger" aria-label="Menú">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
+            </div>
             </div>
         </div>
     </header>
@@ -90,11 +99,11 @@
                         <p>Los hitos más importantes de nuestro recorrido.</p>
                     </a>
 
-                    <a href="pages/trivia.html" class="module-card glass observe-fade" style="transition-delay: 0.3s;">
+                   <!-- <a href="pages/trivia.html" class="module-card glass observe-fade" style="transition-delay: 0.3s;">
                         <div class="card-icon">🎲</div>
                         <h3>Trivia</h3>
                         <p>¿Qué tanto nos conocemos? Un pequeño desafío.</p>
-                    </a>
+                    </a> -->
 
                     <a href="pages/citas.html" class="module-card glass observe-fade" style="transition-delay: 0.4s;">
                         <div class="card-icon">🎰</div>
@@ -121,6 +130,9 @@
     <button id="back-to-top" class="glass icon-btn" aria-label="Volver arriba">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
+
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/presence.js"></script>
 
     <script src="js/app.js"></script>
 </body>

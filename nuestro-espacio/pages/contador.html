@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El tiempo que llevamos escribiendo nuestra historia.">
+    <title>Jorge & Mily | Contador</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/contador.css">
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <header class="navbar glass">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">J<span>&</span>M</a>
+            <nav class="nav-links">
+                <a href="contador.html" class="active">Contador</a>
+                <a href="capsula.html">Cápsula</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="trivia.html">Trivia</a>
+                <a href="citas.html">Citas</a>
+                <a href="album.html">Álbum</a>
+            </nav>
+            <div class="nav-controls">
+                <button class="hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <section class="counter-section">
+            <div class="container">
+                <div class="header-title observe-fade">
+                    <h1>Nuestro <span class="gold-accent">Tiempo</span> Juntos</h1>
+                    <p>Cada segundo cuenta cuando estoy contigo.</p>
+                </div>
+                
+                <div class="counter-grid observe-fade">
+                    <div class="time-box glass">
+                        <span id="years" class="time-value">0</span>
+                        <span class="time-label">Años</span>
+                    </div>
+                    <div class="time-box glass">
+                        <span id="months" class="time-value">0</span>
+                        <span class="time-label">Meses</span>
+                    </div>
+                    <div class="time-box glass">
+                        <span id="weeks" class="time-value">0</span>
+                        <span class="time-label">Semanas</span>
+                    </div>
+                    <div class="time-box glass">
+                        <span id="days" class="time-value">0</span>
+                        <span class="time-label">Días</span>
+                    </div>
+                    <div class="time-box glass">
+                        <span id="hours" class="time-value">0</span>
+                        <span class="time-label">Horas</span>
+                    </div>
+                    <div class="time-box glass">
+                        <span id="minutes" class="time-value">0</span>
+                        <span class="time-label">Minutos</span>
+                    </div>
+                    <div class="time-box glass highlight">
+                        <span id="seconds" class="time-value">0</span>
+                        <span class="time-label">Segundos</span>
+                    </div>
+                </div>
+                
+                <div class="anniversary-alert glass hide" id="anniversary-alert">
+                    <span>🎉 ¡Feliz Aniversario, Mily! 🎉</span>
+                    <button id="play-sound-btn" class="btn btn-primary" style="margin-left: 1rem; padding: 0.5rem 1rem; font-size: 0.8rem;">Reproducir Melodía</button>
+                </div>
+            </div>
+        </section>
+<!--
+        <section class="milestones-section">
+            <div class="container">
+                <h2 class="section-title observe-fade">Nuestros Momentos Inolvidables</h2>
+                
+                <div class="milestones-grid">
+                    <div class="milestone-card glass observe-fade">
+                        <div class="milestone-icon">✨</div>
+                        <h3>El Primer Encuentro</h3>
+                        <p class="milestone-date">El inicio de todo</p>
+                        <p>Ese día en el que nuestras historias se cruzaron y supimos que algo especial estaba por comenzar.</p>
+                    </div>
+
+                    <div class="milestone-card glass observe-fade" style="transition-delay: 0.1s;">
+                        <div class="milestone-icon">💋</div>
+                        <h3>Nuestro Primer Beso</h3>
+                        <p class="milestone-date">Un instante mágico</p>
+                        <p>El momento exacto en el que el tiempo se detuvo y el mundo desapareció por unos segundos.</p>
+                    </div>
+
+                    <div class="milestone-card glass observe-fade" style="transition-delay: 0.2s;">
+                        <div class="milestone-icon">🎸</div>
+                        <h3>La Propuesta</h3>
+                        <p class="milestone-date">El día del "Sí"</p>
+                        <p>Aquel detalle perfecto escondido en la funda de la AZ2204N. Una melodía que nos unió oficialmente.</p>
+                    </div>
+
+                    <div class="milestone-card glass observe-fade" style="transition-delay: 0.3s;">
+                        <div class="milestone-icon">✈️</div>
+                        <h3>Nuestra Primera Aventura</h3>
+                        <p class="milestone-date">Viaje juntos</p>
+                        <p>Preparar las maletas y explorar un lugar nuevo, creando recuerdos lejos de casa.</p>
+                    </div>
+                </div>
+            </div>
+        </section> -->    
+    </main>
+
+    <footer class="footer glass">
+        <div class="container footer-content">
+            <p>Hecho con amor. Jorge & Mily &copy; <span id="year"></span></p>
+        </div>
+    </footer>
+
+    <audio id="anniversary-sound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3" preload="auto"></audio>
+    
+    <script type="module" src="../js/auth.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/contador.js"></script>
+</body>
+</html>

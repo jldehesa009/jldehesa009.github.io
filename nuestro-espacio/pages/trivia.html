@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Juego de trivia para parejas. ¿Qué tanto me conoces?">
+    <title>Jorge & Mily | Trivia</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/trivia.css">
+</head>
+<body>
+    <!-- Navegación -->
+    <header class="navbar glass">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">J<span>&</span>M</a>
+            <nav class="nav-links">
+                <a href="contador.html">Contador</a>
+                <a href="capsula.html">Cápsula</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="trivia.html" class="active">Trivia</a>
+                <a href="citas.html">Citas</a>
+                <a href="album.html">Álbum</a>
+            </nav>
+            <div class="nav-controls">
+                <button class="hamburger" aria-label="Menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="container">
+            <!-- Pantalla de Inicio de la Trivia -->
+            <section id="start-screen" class="trivia-section observe-fade text-center">
+                <h1>¿Qué tanto me <span class="gold-accent">conoces</span>?</h1>
+                <p>Un pequeño desafío para ver si has prestado atención a los detalles de nuestra historia.</p>
+                <div class="trivia-icon">🎲</div>
+                <button id="start-btn" class="btn btn-primary">Comenzar el Desafío</button>
+            </section>
+
+            <!-- Pantalla de Preguntas -->
+            <section id="quiz-screen" class="trivia-section hide">
+                <div class="quiz-card glass">
+                    <div class="quiz-header">
+                        <span id="question-counter" class="question-counter">Pregunta 1 de 10</span>
+                        <div class="progress-bar-container">
+                            <div id="progress-bar" class="progress-bar"></div>
+                        </div>
+                    </div>
+                    
+                    <h2 id="question-text" class="question-text">Cargando pregunta...</h2>
+                    
+                    <div id="options-container" class="options-grid">
+                        <!-- Botones generados por JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pantalla de Resultados -->
+            <section id="result-screen" class="trivia-section hide text-center">
+                <div class="result-card glass">
+                    <h2>Resultados</h2>
+                    <div class="score-circle">
+                        <span id="final-score" class="score-text">0/10</span>
+                    </div>
+                    <h3 id="result-message" class="result-message">Mensaje</h3>
+                    <p id="result-submessage" class="result-submessage">Submensaje</p>
+                    <button id="restart-btn" class="btn btn-primary">Volver a Jugar</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer glass">
+        <div class="container footer-content">
+            <p>Hecho con amor. Jorge & Mily &copy; <span id="year"></span></p>
+        </div>
+    </footer>
+    
+    <script type="module" src="../js/auth.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/trivia.js"></script>
+</body>
+</html>

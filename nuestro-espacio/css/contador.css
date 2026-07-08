@@ -1,0 +1,208 @@
+/* ==========================================================================
+   ESPECÍFICOS DEL CONTADOR
+   ========================================================================== */
+.page-container {
+    padding-top: 100px;
+    min-height: 100vh;
+}
+
+.header-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.header-title h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 0.5rem;
+}
+
+.header-title p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+/* ==========================================================================
+   GRID DEL CONTADOR DE TIEMPO
+   ========================================================================== */
+.counter-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.time-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 130px;
+    border-radius: 20px;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.time-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+.time-value {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.time-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+}
+
+/* Destacar los segundos */
+.time-box.highlight {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: #fff;
+}
+.time-box.highlight .time-value,
+.time-box.highlight .time-label {
+    color: #fff;
+}
+
+[data-theme="dark"] .time-box.highlight {
+    background: linear-gradient(135deg, var(--primary-dark), var(--text-color));
+}
+
+/* Alerta de Aniversario */
+.anniversary-alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--secondary);
+    border: 1px solid var(--accent);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    margin: 0 auto 4rem auto;
+    max-width: 600px;
+    animation: pulseGlow 2s infinite alternate;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.anniversary-alert.hide {
+    display: none;
+    opacity: 0;
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+    100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6); }
+}
+
+/* ==========================================================================
+   HITOS ESPECIALES (Grid Style)
+   ========================================================================== */
+.milestones-section {
+    padding: 4rem 0;
+    position: relative;
+}
+
+.milestones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.milestone-card {
+    padding: 2rem;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.milestone-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary);
+    transition: width var(--transition-fast);
+    z-index: 0;
+}
+
+.milestone-card:hover::before {
+    width: 100%;
+    opacity: 0.1;
+}
+
+.milestone-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.milestone-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.milestone-date {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+}
+
+.milestone-card p:last-child {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   CONFETI CANVAS
+   ========================================================================== */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@media (max-width: 600px) {
+    .time-box {
+        width: 100px;
+        height: 100px;
+    }
+    .time-value {
+        font-size: 1.8rem;
+    }
+    .time-label {
+        font-size: 0.7rem;
+    }
+}

@@ -56,13 +56,19 @@
 
     <main class="page-container">
         <section class="container">
-            <div class="glass letter-content observe-fade is-visible" style="max-width: 800px; margin: 0 auto;">
+            <div class="glass letter-content observe-fade is-visible" style="max-width: 1000px; margin: 0 auto;">
                 
                 <h1 style="margin-bottom: 0.5rem;">Feliz Día de la <span class="gold-accent">Abogada</span></h1>
                 <p style="font-style: italic; opacity: 0.8; margin-bottom: 2rem;">12 de Julio de 2026</p>
 
-                <div class="video-container">
-<iframe src="https://www.youtube.com/embed/Jm3N9lI9oGA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                </div>
+                <!-- Botón de música agregado aquí -->
+                <div id="music-start-container" style="text-align: center; margin-bottom: 2rem;">
+                    <button id="btn-start-music" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem; border-radius: 50px; background-color: var(--accent); color: white; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4); transition: transform 0.3s ease;">
+                        💌 Tocar para leer con música
+                    </button>
+                </div>
+
+              
 
                 <p>
                     Mily, me llena de orgullo verte crecer y esforzarte en todo lo que te propones. Estudiar derecho es un camino increíble y sé que tienes el talento y la dedicación para lograr cosas inmensas.
@@ -80,5 +86,47 @@
         </section>
     </main>
 
+    <!-- Audio oculto con ruta relativa corregida -->
+    <audio id="musica-fondo" loop>
+        <source src="../assets/sounds/Bebe - Ella (Videoclip Oficial) - Bebe.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Script mágico para el botón -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnMusic = document.getElementById('btn-start-music');
+            const containerMusic = document.getElementById('music-start-container');
+            const audio = document.getElementById('musica-fondo');
+            
+            // Bajamos el volumen al 30%
+            audio.volume = 0.3; 
+
+            // Efecto hover
+            btnMusic.addEventListener('mouseover', () => {
+                btnMusic.style.transform = 'scale(1.05)';
+            });
+            btnMusic.addEventListener('mouseout', () => {
+                btnMusic.style.transform = 'scale(1)';
+            });
+
+            // Acción al dar clic
+            btnMusic.addEventListener('click', () => {
+                audio.play().then(() => {
+                    // Desvanecemos el botón elegantemente
+                    containerMusic.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                    containerMusic.style.opacity = "0";
+                    containerMusic.style.transform = "translateY(-10px)";
+                    
+                    // Lo eliminamos de la pantalla para que no estorbe
+                    setTimeout(() => {
+                        containerMusic.style.display = "none";
+                    }, 600);
+                }).catch(error => {
+                    console.log("Error al reproducir el audio:", error);
+                    alert("Asegúrate de que el archivo MP3 está en la carpeta assets/sounds.");
+                });
+            });
+        });
+    </script>
 </body>
 </html>

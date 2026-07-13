@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       4. GUARDAR NUEVA CÁPSULA (CON VALIDACIÓN DE HORA LOCAL)
+       4. GUARDAR NUEVA CÁPSULA Y NOTIFICAR
        ========================================================================== */
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -195,6 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 visto: false, // Nace sin leer
                 createdAt: serverTimestamp()
             });
+
+            // AQUÍ LLAMAMOS A LA FUNCIÓN DE EMAILJS TRAS GUARDAR CON ÉXITO
+            notificarNuevaCapsula();
 
             form.reset();
             showToast("¡Cápsula sellada y enviada al futuro!");
@@ -263,4 +266,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const day = String(now.getDate()).padStart(2, '0');
         dateInput.setAttribute('min', `${year}-${month}-${day}`);
     }
-});
+
+    /* ==========================================================================
+       6. FUNCIÓN PARA ENVIAR NOTIFICACIÓN POR EMAIL (EmailJS)
+       ========================================================================== */
+    function notificarNuevaCapsula() {
+        if (!currentUserUid || !partnerUid) return;
+
+        let correoDestino = "";
+        
+        // ⚠️ COLOCA SUS CORREOS REALES AQUÍ
+        const EMAIL_JORGE = "dehesaj25@gmail.com";
+        const EMAIL_MILY = "milagrosgomezpriego@gmail.com";
+
+        // Comprobamos si tú enviaste la cápsula usando las constantes que ya tienes
+        if (currentUserUid === USERS.JORGE) {
+            correoDestino = EMAIL_MILY;
+        } else {
+            correoDestino = EMAIL_JORGE;
+        }
+
+        // Armamos el objeto con el nombre del destinatario (que ya se calculó arriba) y su correo
+        const parametros = {
+            to_name: partnerName, 
+            to_email: correoDestino, 
+            message: "¡Hola! Tienes un nuevo mensaje sellado en la Cápsula del Tiempo."
+        };
+
+        // ⚠️ REEMPLAZA ESTO CON TUS IDs DE EMAILJS (Servicio de Gmail)
+        const SERVICE_ID = "service_b709ryr";
+        const TEMPLATE_ID = "template_eg518ol";
+
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, parametros)
+            .then(function(respuesta) {
+                console.log(`¡Notificación enviada con éxito a ${partnerName}!`, respuesta.status, respuesta.text);
+            }, function(error) {
+                console.error("Falló el envío del correo:", error);
+            });
+    }
+
+}); // Fin del DOMContentLoaded

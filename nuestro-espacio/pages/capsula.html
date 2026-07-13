@@ -100,8 +100,17 @@
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/presence.js"></script>
     
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // REEMPLAZA ESTO CON LA "PUBLIC KEY" DE TU CUENTA DE EMAILJS
+            emailjs.init("PqqsTJPb5AVS7MyXB");
+        })();
+    </script>
+
     <script type="module" src="../js/capsula.js"></script>
     
     <script src="../js/app.js"></script>
+   
 </body>
 </html>

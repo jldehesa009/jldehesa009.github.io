@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jorge & Mily | Baúl Histórico</title>
+    
+    <!-- Ícono de llave antigua para la pestaña -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗝️</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* Estilos específicos para la cuadrícula del baúl */
+        .baul-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .baul-card {
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .baul-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+        
+        .baul-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .baul-card:hover .baul-icon {
+            transform: scale(1.1);
+        }
+        
+        .baul-card h3 {
+            font-family: var(--font-heading);
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .baul-date {
+            font-size: 0.85rem;
+            font-style: italic;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+        
+        .baul-desc {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar glass">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">J<span>&</span>M</a>
+            <nav class="nav-links">
+                <a href="contador.html">Contador</a>
+                <a href="capsula.html">Cápsula</a>
+                <a href="timeline.html">Timeline</a>
+                <a href="citas.html">Citas</a>
+                <a href="album.html">Álbum</a>
+                <a href="historico.html" class="active">Histórico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <section class="container observe-fade is-visible">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h1>El Baúl de los <span class="gold-accent">Recuerdos</span></h1>
+                <p style="font-size: 1.1rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                    Un espacio para guardar aquellos momentos, sorpresas y detalles eventuales que merecen ser recordados para siempre.
+                </p>
+            </div>
+
+            <!-- Cuadrícula de Recuerdos -->
+            <div class="baul-grid">
+                
+                <!-- TARJETA 1: Día de la Abogada -->
+                <a href="abogada.html" class="glass baul-card">
+                    <div class="baul-icon">⚖️</div>
+                    <h3>Día de la Abogada</h3>
+                    <span class="baul-date">12 de Julio de 2026</span>
+                    <p class="baul-desc">Una felicitación especial con dedicatoria musical para celebrar tu dedicación y talento en el derecho.</p>
+                </a>
+
+                <!-- TARJETA DE EJEMPLO (Plantilla para el futuro) -->
+                <!-- 
+                <a href="enlace-a-tu-nueva-pagina.html" class="glass baul-card">
+                    <div class="baul-icon">🌟</div>
+                    <h3>Título del Momento</h3>
+                    <span class="baul-date">Fecha especial</span>
+                    <p class="baul-desc">Breve descripción de lo que trata esta página o sorpresa para mantener el recuerdo vivo.</p>
+                </a> 
+                -->
+
+            </div>
+        </section>
+    </main>
+</body>
+    <script src="../js/app.js"></script>
+
+</html>

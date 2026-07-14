@@ -3,13 +3,17 @@
   "name": "Jorge & Mily | Rincón Digital",
   "icons": [
     {
-      "src": "img/icon-180.png",
+      "src": "/nuestro-espacio/img/icon-180.png",
       "type": "image/png",
       "sizes": "180x180"
+    },
+    {
+      "src": "/nuestro-espacio/img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-    
   ],
-  "start_url": "/index.html",
+  "start_url": "/nuestro-espacio/index.html",
   "background_color": "#0f1012",
   "theme_color": "#d4af37",
   "display": "standalone",

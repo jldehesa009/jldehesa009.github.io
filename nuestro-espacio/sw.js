@@ -20,8 +20,8 @@ self.addEventListener('push', (event) => {
 
     const options = {
         body: data.body,
-        icon: '/nuestro-espacio/img/icon-180.png',
-        badge: '/nuestro-espacio/img/icon-180.png',
+        icon: '/nuestro-espacio/assets/img/icon-180.png',
+        badge: '/nuestro-espacio/assets/img/icon-180.png',
         vibrate: [100, 50, 100],
         data: { dateOfArrival: Date.now(), primaryKey: '2' }
     };

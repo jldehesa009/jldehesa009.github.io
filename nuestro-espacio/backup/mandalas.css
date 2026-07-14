@@ -1,0 +1,238 @@
+/* ==========================================================================
+   DISEÑO DE GALERÍA DE ARTE (Mandalas)
+   ========================================================================== */
+
+/* Fondo específico para darle vibra de museo (opcional, si quieres aislarlo del fondo global) */
+.mandalas-page-bg {
+    background-color: #0d0d0d;
+    background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #050505 100%);
+    color: #f5f5f5;
+}
+
+/* El Layout Masonry (Mosaico dinámico) */
+.art-gallery-grid {
+    column-count: 3;
+    column-gap: 2rem;
+    padding: 2rem 0;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .art-gallery-grid { column-count: 2; }
+}
+
+@media (max-width: 600px) {
+    .art-gallery-grid { column-count: 1; }
+}
+
+/* El "Marco" de cada obra */
+.art-piece {
+    break-inside: avoid; /* Evita que la obra se corte a la mitad entre columnas */
+    margin-bottom: 2rem;
+    background: #111; 
+    border: 1px solid rgba(212, 175, 55, 0.15); /* Borde con un toque sutil de dorado */
+    border-radius: 4px;
+    padding: 1.2rem;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+/* Efecto al pasar el mouse: se eleva e ilumina */
+.art-piece:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.12); /* Resplandor cálido */
+    border-color: rgba(212, 175, 55, 0.4);
+}
+
+/* La imagen del mandala */
+.art-image-wrapper {
+    overflow: hidden;
+    border-radius: 2px;
+    cursor: zoom-in;
+}
+
+.art-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+    filter: contrast(1.05) saturate(1.05); /* Resalta ligeramente los colores del arte */
+}
+
+.art-piece:hover .art-image {
+    transform: scale(1.03); /* Zoom súper suave a la obra */
+}
+
+/* Tipografía de galería */
+.art-details {
+    margin-top: 1.2rem;
+    text-align: center;
+}
+
+.art-title {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37; /* Tono dorado elegante */
+    font-size: 1.4rem;
+    margin: 0 0 0.4rem 0;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.art-author {
+    font-family: 'Poppins', sans-serif;
+    color: #888;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+/* ==========================================================================
+   EXHIBICIÓN PREMIUM: MUSEO DIGITAL DE ALTA GAMA (LIGHTBOX)
+   ========================================================================== */
+
+/* 1. La Atmósfera de la Sala (Pared de Galería con Iluminación de Enfoque) */
+#lightbox {
+    background-color: #0f1012 !important;
+    /* Simulación de un reflector de riel de museo (iluminación cenital difusa de 2700K) */
+    background-image: radial-gradient(circle at 50% 25%, rgba(255, 242, 215, 0.18) 0%, rgba(10, 11, 13, 1) 65%) !important;
+    backdrop-filter: blur(12px) saturate(120%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Forzar que la capa oscura por defecto del álbum no interfiera */
+#lightbox .lightbox-overlay {
+    background: transparent !important;
+    opacity: 0 !important;
+}
+
+/* 2. El Cuadro de Exhibición (Marco del Museo con Perspectiva Estructural) */
+#lightbox .lightbox-image-container {
+    position: relative;
+    background: #fbf9f6; /* Papel de algodón museográfico de archivo (Off-white natural) */
+    padding: 45px 45px 50px 45px; /* Passe-partout generoso para dar aire a la obra */
+    
+    /* Construcción del Marco Físico: Madera de ébano con filete interno dorado */
+    border: 24px solid #141416; 
+    outline: 1px solid #d4af37; /* El filete metálico dorado interno del marco */
+    outline-offset: -24px;
+
+    /* Sombra Tridimensional Compleja (4 capas para emular la caída real del cuadro sobre la pared) */
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.05),
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        0 15px 35px rgba(0, 0, 0, 0.65),
+        0 40px 85px rgba(0, 0, 0, 0.85);
+
+    border-image: linear-gradient(135deg, #1f1f22 0%, #0d0d0e 50%, #1a1a1c 100%) 1;
+    overflow: visible !important;
+    max-width: 90vh;
+    transform: scale(0.98);
+    animation: zoomSala 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. El Lienzo / Mandala */
+#lightbox-img {
+    max-height: 55vh !important;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 8px; /* Margen técnico del lienzo */
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.15),
+        inset 0 0 10px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* 4. Cédula Catalográfica Minimalista (Etiqueta de Museo Independiente) */
+#lightbox-caption {
+    position: absolute;
+    bottom: -90px; /* Separada físicamente del marco, anclada a la pared */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    color: #1a1a1a !important;
+    padding: 14px 28px;
+    width: auto;
+    min-width: 260px;
+    text-align: left;
+    
+    /* Estilo de ficha técnica de galería */
+    font-family: 'Poppins', sans-serif;
+    border-left: 3px solid #d4af37;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-radius: 1px;
+}
+
+/* Formateo del texto interno de la cédula para que se vea fino */
+#lightbox-caption::before {
+    content: "Mily"; /* Autor fijo de la obra */
+    display: block;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888888;
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+#lightbox-caption {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-style: italic;
+    letter-spacing: 0.5px;
+}
+
+#lightbox-caption::after {
+    content: " \00A0 \00A0 • \00A0 \00A0 2026"; /* Año de catalogación */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    color: #aeaeae;
+    font-weight: 400;
+}
+
+/* 5. Controles de Navegación del Museo (Diseño invisible de interfaz limpia) */
+.lightbox-nav, .lightbox-close {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(4px);
+}
+
+.lightbox-nav:hover, .lightbox-close:hover {
+    background: #ffffff !important;
+    color: #0f1012 !important;
+    border-color: #ffffff !important;
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+}
+
+.lightbox-close {
+    top: 30px !important;
+    right: 30px !important;
+    font-size: 1.4rem;
+}
+
+/* Animación de entrada elegante para la sala */
+@keyframes zoomSala {
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(0.98) translateY(0);
+    }
+}

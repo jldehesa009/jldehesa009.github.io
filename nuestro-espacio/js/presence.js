@@ -15,23 +15,9 @@ const presenceIndicator = document.getElementById('presence-indicator');
 const statusDot = document.querySelector('.status-dot');
 const statusText = document.getElementById('status-text');
 
-// Variable de control para enviar la notificación SOLO en el cambio de estado
 let partnerEstabaConectado = false;
 
-// Solicitar permiso de notificaciones con el primer clic en la pantalla
-document.body.addEventListener('click', () => {
-    if ("Notification" in window) {
-        if (Notification.permission === "default") {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    console.log("🔔 Permiso de notificaciones concedido.");
-                }
-            });
-        }
-    }
-}, { once: true }); // El 'once: true' hace que este evento se destruya tras el primer clic
-
-    // Registro del Service Worker para soporte PWA e iOS
+// Registro del Service Worker para soporte PWA e iOS
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/nuestro-espacio/sw.js')
@@ -40,6 +26,12 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Solicitar permiso de notificaciones con el primer clic en la pantalla
+document.body.addEventListener('click', () => {
+    if ("Notification" in window && Notification.permission === "default") {
+        Notification.requestPermission();
+    }
+}, { once: true });
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -47,7 +39,7 @@ onAuthStateChanged(auth, (user) => {
         let partnerUid = null;
         let partnerName = "";
 
-        // Determinar identidades dinámicamente
+        // Determinar identidades
         if (myUid === USERS.JORGE) {
             partnerUid = USERS.MILY;
             partnerName = "Mily";
@@ -57,7 +49,7 @@ onAuthStateChanged(auth, (user) => {
         }
 
         // ==========================================================================
-        // 2. SISTEMA DE PRESENCIA Y NOTIFICACIONES DE ESCRITORIO
+        // 2. SISTEMA DE PRESENCIA ("EN LÍNEA") - REALTIME DATABASE
         // ==========================================================================
         if (presenceIndicator) {
             presenceIndicator.classList.remove('hide');
@@ -66,7 +58,7 @@ onAuthStateChanged(auth, (user) => {
             const partnerStatusRef = ref(rtdb, '/status/' + partnerUid);
             const connectedRef = ref(rtdb, '.info/connected');
 
-            // Registrar mi estado de conexión
+            // Mi estado
             onValue(connectedRef, (snap) => {
                 if (snap.val() === true) {
                     onDisconnect(myStatusRef).set({
@@ -81,31 +73,27 @@ onAuthStateChanged(auth, (user) => {
                 }
             });
 
-            // Escuchar el estado de la pareja en tiempo real
+            // Estado de mi pareja
             onValue(partnerStatusRef, (snapshot) => {
                 const data = snapshot.val();
-                
                 if (data && data.online) {
                     statusDot.classList.add('online');
                     statusText.textContent = `${partnerName} en línea`;
 
-                    // 👇 DISPARAR NOTIFICACIÓN DE ESCRITORIO EN CAMBIO DE ESTADO 👇
+                    // Notificación disparada vía Service Worker
                     if (!partnerEstabaConectado && Notification.permission === "granted") {
-                        const notif = new Notification(`${partnerName} está en línea ✨`, {
-                            body: `Acaba de entrar al rincón digital.`,
-                            tag: "presencia-pareja" // Evita que se acumulen notificaciones repetidas
+                        navigator.serviceWorker.ready.then(reg => {
+                            reg.showNotification(`${partnerName} está en línea ✨`, {
+                                body: "Acaba de entrar al rincón digital.",
+                                tag: "presencia-pareja"
+                            });
                         });
-                        
-                        // Auto-cerrar después de 7 segundos
-                        setTimeout(() => notif.close(), 7000);
                     }
                     partnerEstabaConectado = true;
-                    
                 } else {
                     statusDot.classList.remove('online');
                     statusText.textContent = `${partnerName} desconectado/a`;
-                    
-                    partnerEstabaConectado = false; // Resetear bandera al desconectarse
+                    partnerEstabaConectado = false;
                 }
             });
         }
@@ -122,9 +110,9 @@ onAuthStateChanged(auth, (user) => {
             onSnapshot(qNotif, (snapshot) => {
                 badges.forEach(badge => {
                     if (!snapshot.empty) {
-                        badge.classList.remove('hide'); 
+                        badge.classList.remove('hide'); // Encender puntito
                     } else {
-                        badge.classList.add('hide');    
+                        badge.classList.add('hide');    // Apagar puntito
                     }
                 });
             }, (error) => {

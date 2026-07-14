@@ -18,8 +18,18 @@ const statusText = document.getElementById('status-text');
 // Variable de control para enviar la notificación SOLO en el cambio de estado
 let partnerEstabaConectado = false;
 
-// Solicitar permisos de notificación al cargar el DOM si el navegador lo soporta
-document.addEventListener('DOMContentLoaded', () => {
+// Solicitar permiso de notificaciones con el primer clic en la pantalla
+document.body.addEventListener('click', () => {
+    if ("Notification" in window) {
+        if (Notification.permission === "default") {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    console.log("🔔 Permiso de notificaciones concedido.");
+                }
+            });
+        }
+    }
+}, { once: true }); // El 'once: true' hace que este evento se destruya tras el primer clic
 
     // Registro del Service Worker para soporte PWA e iOS
 if ('serviceWorker' in navigator) {

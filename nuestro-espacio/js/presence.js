@@ -20,6 +20,16 @@ let partnerEstabaConectado = false;
 
 // Solicitar permisos de notificación al cargar el DOM si el navegador lo soporta
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Registro del Service Worker para soporte PWA e iOS
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('../sw.js')
+            .then(reg => console.log('🟢 Service Worker registrado con éxito:', reg.scope))
+            .catch(err => console.error('🔴 Error al registrar el Service Worker:', err));
+    });
+}
+
     if ("Notification" in window) {
         if (Notification.permission !== "granted" && Notification.permission !== "denied") {
             Notification.requestPermission().then(permission => {

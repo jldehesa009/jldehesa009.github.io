@@ -40,16 +40,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-    if ("Notification" in window) {
-        if (Notification.permission !== "granted" && Notification.permission !== "denied") {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    console.log("🔔 Permiso de notificaciones concedido.");
-                }
-            });
-        }
-    }
-});
 
 onAuthStateChanged(auth, (user) => {
     if (user) {

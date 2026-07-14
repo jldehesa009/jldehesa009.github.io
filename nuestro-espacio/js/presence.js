@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/fi
 import { collection, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // ==========================================================================
-// 1. IDENTIFICADORES
+// 1. IDENTIFICADORES Y NOTIFICACIONES NATIVAS
 // ==========================================================================
 const USERS = {
     JORGE: "M3Lazbqi5shxyhmW6SOacU1lxEH3",
@@ -15,13 +15,29 @@ const presenceIndicator = document.getElementById('presence-indicator');
 const statusDot = document.querySelector('.status-dot');
 const statusText = document.getElementById('status-text');
 
+// Variable de control para enviar la notificación SOLO en el cambio de estado
+let partnerEstabaConectado = false;
+
+// Solicitar permisos de notificación al cargar el DOM si el navegador lo soporta
+document.addEventListener('DOMContentLoaded', () => {
+    if ("Notification" in window) {
+        if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    console.log("🔔 Permiso de notificaciones concedido.");
+                }
+            });
+        }
+    }
+});
+
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const myUid = user.uid;
         let partnerUid = null;
         let partnerName = "";
 
-        // Determinar identidades
+        // Determinar identidades dinámicamente
         if (myUid === USERS.JORGE) {
             partnerUid = USERS.MILY;
             partnerName = "Mily";
@@ -31,7 +47,7 @@ onAuthStateChanged(auth, (user) => {
         }
 
         // ==========================================================================
-        // 2. SISTEMA DE PRESENCIA ("EN LÍNEA") - REALTIME DATABASE
+        // 2. SISTEMA DE PRESENCIA Y NOTIFICACIONES DE ESCRITORIO
         // ==========================================================================
         if (presenceIndicator) {
             presenceIndicator.classList.remove('hide');
@@ -40,7 +56,7 @@ onAuthStateChanged(auth, (user) => {
             const partnerStatusRef = ref(rtdb, '/status/' + partnerUid);
             const connectedRef = ref(rtdb, '.info/connected');
 
-            // Mi estado
+            // Registrar mi estado de conexión
             onValue(connectedRef, (snap) => {
                 if (snap.val() === true) {
                     onDisconnect(myStatusRef).set({
@@ -55,15 +71,31 @@ onAuthStateChanged(auth, (user) => {
                 }
             });
 
-            // Estado de mi pareja
+            // Escuchar el estado de la pareja en tiempo real
             onValue(partnerStatusRef, (snapshot) => {
                 const data = snapshot.val();
+                
                 if (data && data.online) {
                     statusDot.classList.add('online');
                     statusText.textContent = `${partnerName} en línea`;
+
+                    // 👇 DISPARAR NOTIFICACIÓN DE ESCRITORIO EN CAMBIO DE ESTADO 👇
+                    if (!partnerEstabaConectado && Notification.permission === "granted") {
+                        const notif = new Notification(`${partnerName} está en línea ✨`, {
+                            body: `Acaba de entrar al rincón digital.`,
+                            tag: "presencia-pareja" // Evita que se acumulen notificaciones repetidas
+                        });
+                        
+                        // Auto-cerrar después de 7 segundos
+                        setTimeout(() => notif.close(), 7000);
+                    }
+                    partnerEstabaConectado = true;
+                    
                 } else {
                     statusDot.classList.remove('online');
                     statusText.textContent = `${partnerName} desconectado/a`;
+                    
+                    partnerEstabaConectado = false; // Resetear bandera al desconectarse
                 }
             });
         }
@@ -71,20 +103,18 @@ onAuthStateChanged(auth, (user) => {
         // ==========================================================================
         // 3. MOTOR DE NOTIFICACIONES (CÁPSULAS SIN LEER) - FIRESTORE
         // ==========================================================================
-        // Buscamos TODOS los puntitos en la página
         const badges = document.querySelectorAll('.badge-notif');
         
         if (badges.length > 0) {
             const capsulesRef = collection(db, "capsules");
-            // Consulta: Cartas para mí, que su estado "visto" sea estrictamente falso
             const qNotif = query(capsulesRef, where("to", "==", myUid), where("visto", "==", false));
 
             onSnapshot(qNotif, (snapshot) => {
                 badges.forEach(badge => {
                     if (!snapshot.empty) {
-                        badge.classList.remove('hide'); // Encender puntito
+                        badge.classList.remove('hide'); 
                     } else {
-                        badge.classList.add('hide');    // Apagar puntito
+                        badge.classList.add('hide');    
                     }
                 });
             }, (error) => {

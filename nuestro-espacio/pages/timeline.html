@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="../css/timeline.css">
 </head>
 <body>
-    <!-- Navegación -->
     <header class="navbar glass">
         <div class="nav-container">
             <a href="../index.html" class="logo">J<span>&</span>M</a>
@@ -38,7 +37,6 @@
     </header>
 
     <main class="page-container">
-        <!-- Título -->
         <section class="timeline-header text-center">
             <div class="container observe-fade">
                 <h1>Nuestro <span class="gold-accent">Setlist</span></h1>
@@ -46,77 +44,44 @@
             </div>
         </section>
 
-        <!-- Línea de Tiempo -->
         <section class="timeline-section">
             <div class="container timeline-container" id="timeline-container">
-                <!-- Líneas centrales -->
                 <div class="timeline-line"></div>
                 <div class="timeline-line-progress" id="timeline-progress"></div>
 
-                <!-- Track 1 -->
-                <div class="timeline-item left observe-fade">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content glass">
-                        <span class="track-number">Track 01</span>
-                        <h3 class="timeline-title">El Telón se Abre</h3>
-                        <div class="timeline-date">8 de Abril, 2026</div>
-                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" alt="Concierto" class="timeline-img">
-                        <p>Nuestras miradas se cruzaron por primera vez. Como cuando suenan los primeros acordes de una canción que sabes que será tu favorita.</p>
-                    </div>
                 </div>
-
-                <!-- Track 2 -->
-                <div class="timeline-item right observe-fade">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content glass">
-                        <span class="track-number">Track 02</span>
-                        <h3 class="timeline-title">El Primer Beso</h3>
-                        <div class="timeline-date">30 de Octubre, 2023</div>
-                        <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?q=80&w=800&auto=format&fit=crop" alt="Luces" class="timeline-img">
-                        <p>Bajo un cielo estrellado y luces tenues, el tiempo se detuvo. El mejor solo de guitarra que jamás hayamos escuchado.</p>
-                    </div>
-                </div>
-
-                <!-- Track 3 -->
-                <div class="timeline-item left observe-fade">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content glass">
-                        <span class="track-number">Track 03</span>
-                        <h3 class="timeline-title">La Propuesta (AZ2204N)</h3>
-                        <div class="timeline-date">14 de Febrero, 2024</div>
-                        <img src="https://images.unsplash.com/photo-1525201548942-d8732f6617a0?q=80&w=800&auto=format&fit=crop" alt="Guitarra Ibanez" class="timeline-img">
-                        <p>Una sorpresa escondida en la funda de mi guitarra. Un papel, una pregunta y el "Sí" que cambió nuestra sinfonía para siempre.</p>
-                    </div>
-                </div>
-
-                <!-- Track 4 -->
-                <div class="timeline-item right observe-fade">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content glass">
-                        <span class="track-number">Track 04</span>
-                        <h3 class="timeline-title">Nuestra Primera Aventura</h3>
-                        <div class="timeline-date">10 de Julio, 2024</div>
-                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800&auto=format&fit=crop" alt="Viaje" class="timeline-img">
-                        <p>Maletas listas, una playlist interminable para la carretera y la emoción de descubrir un rincón nuevo del mundo tomados de la mano.</p>
-                    </div>
-                </div>
-
-                <!-- Track 5 -->
-                <div class="timeline-item left observe-fade">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content glass">
-                        <span class="track-number">Track 05</span>
-                        <h3 class="timeline-title">Tocando Juntos</h3>
-                        <div class="timeline-date">Presente</div>
-                        <div class="timeline-img-placeholder">
-                            <span>Próximamente más recuerdos...</span>
-                        </div>
-                        <p>Seguimos escribiendo letras, descubriendo melodías y bailando al ritmo de nuestra propia música. Lo mejor está por venir.</p>
-                    </div>
-                </div>
-            </div>
         </section>
     </main>
+
+    <button class="fab-add" id="btn-open-modal" aria-label="Agregar Track">+</button>
+
+    <div class="modal-overlay hide" id="timeline-modal">
+        <div class="modal-content glass">
+            <h2>Agregar Nuevo <span class="gold-accent">Track</span></h2>
+            <form id="timeline-form">
+                <div class="form-group">
+                    <label for="track-title">Nombre del Recuerdo (Canción)</label>
+                    <input type="text" id="track-title" required placeholder="Ej. Nuestro Primer Concierto">
+                </div>
+                <div class="form-group">
+                    <label for="track-date">Fecha del Suceso</label>
+                    <input type="date" id="track-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="track-img">URL de la Imagen (Unsplash o similar)</label>
+                    <input type="url" id="track-img" placeholder="https://images.unsplash.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="track-desc">La Historia (Anécdota)</label>
+                    <textarea id="track-desc" rows="3" required placeholder="Cuéntame qué pasó..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="btn-close-modal">Cancelar</button>
+                    <button type="submit" class="btn-primary">Grabar Track 🎙️</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <footer class="footer glass">
         <div class="container footer-content">
@@ -126,6 +91,6 @@
     
     <script type="module" src="../js/auth.js"></script>
     <script src="../js/app.js"></script>
-    <script src="../js/timeline.js"></script>
+    <script type="module" src="../js/timeline.js"></script>
 </body>
 </html>

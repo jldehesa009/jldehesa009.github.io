@@ -102,7 +102,8 @@ function renderTrack(data, index) {
 
     const imagenHTML = data.image 
         ? `<img src="${data.image}" alt="${data.title}" class="timeline-img">`
-        : `<div class="timeline-img-placeholder"><span>✨ Sin foto de la sinfonía</span></div>`;
+        : ``; 
+       // : `<div class="timeline-img-placeholder"><span>✨ Sin foto de la sinfonía</span></div>`;
 
     const numeroTrack = String(index).padStart(2, '0');
 
